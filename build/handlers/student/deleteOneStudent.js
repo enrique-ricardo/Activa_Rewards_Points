@@ -10,11 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteStudent = void 0;
-const studentServices_js_1 = require("../../model/services/studentServices.js");
+const studentServices_1 = require("../../model/services/studentServices");
 function deleteStudent(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const studentId = req.body.student;
-        (0, studentServices_js_1.deleteOneStudent)(studentId, (err, result) => {
+        (0, studentServices_1.deleteOneStudent)(studentId, (err, result) => {
             if (err) {
                 res.status(404).json({ "message": err.message });
             }

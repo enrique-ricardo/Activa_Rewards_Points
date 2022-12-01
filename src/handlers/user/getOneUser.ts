@@ -1,7 +1,7 @@
-import {db} from "../../config.js";
+import {db} from "../../config";
 import express from 'express';
-import { findOneUser } from "../../model/services/userServices.js";
-import { User } from "../../model/types/User.js";
+import { findOneUser } from "../../model/services/userServices";
+import { User } from "../../model/types/User";
 
 
 function getOneUser(req: express.Request, res: express.Response){
