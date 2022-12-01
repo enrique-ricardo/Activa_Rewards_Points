@@ -1,5 +1,5 @@
-import { Student } from "../../model/types/student.js";
-import {findAllStudents} from "../../model/services/studentServices.js";
+import { Student } from "../../model/types/student";
+import {findAllStudents} from "../../model/services/studentServices";
 import express from 'express';
 
 

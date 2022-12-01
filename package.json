@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node ./build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "dev": "ts-node-dev src/index.ts",
+    "lint": "ts-standard"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +19,7 @@
     "@types/express-session": "^1.17.5",
     "@types/mysql": "^2.15.21",
     "@types/node": "^18.11.3",
+    "ts-standard": "^12.0.1",
     "typescript": "^4.8.4"
   },
   "dependencies": {
@@ -28,6 +31,14 @@
     "express-session": "^1.17.3",
     "method-override": "^3.0.0",
     "mysql": "^2.18.1",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "ts-node-dev": "^2.0.0"
+
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "extends": ["./node_modules/ts-standard/eslintrc.json"]
   }
 }

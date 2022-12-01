@@ -1,6 +1,6 @@
 import express from 'express';
-import { Student } from '../../model/types/student.js';
-import {findOneStudent} from '../../model/services/studentServices.js';
+import { Student } from '../../model/types/student';
+import {findOneStudent} from '../../model/services/studentServices';
 
 async function getOneStudent(req: express.Request, res: express.Response){
     const studentId = req.params.id_student;

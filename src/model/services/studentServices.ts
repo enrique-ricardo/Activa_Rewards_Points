@@ -1,5 +1,5 @@
-import { Student } from '../types/student.js';
-import {db} from '../../config.js';
+import { Student } from '../types/student';
+import {db} from '../../config';
 import {OkPacket, RowDataPacket} from "mysql2";
 import mysqlPromise from "mysql2/promise";
 

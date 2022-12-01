@@ -1,5 +1,5 @@
-import {db} from "../../config.js";
-import { User } from "../../model/types/User.js";
+import {db} from "../../config";
+import { User } from "../../model/types/User";
 import express from 'express';
 import axios from "axios";
 
