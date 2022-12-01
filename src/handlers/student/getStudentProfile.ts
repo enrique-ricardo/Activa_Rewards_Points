@@ -1,5 +1,5 @@
 import express from 'express';
-import {Student} from '../../model/types/student';
+import {Student} from '../../model/types/student.js';
 import axios from 'axios';
 
 

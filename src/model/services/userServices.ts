@@ -1,4 +1,4 @@
-import { User } from "../types/User";
+import { User } from "../types/User.js";
 import {RowDataPacket} from "mysql2";
 import { db } from "../../config";
 

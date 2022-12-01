@@ -1,6 +1,6 @@
 import express from 'express';
-import { Student } from '../../model/types/student';
-import {deleteOneStudent} from '../../model/services/studentServices';
+import { Student } from '../../model/types/student.js';
+import {deleteOneStudent} from '../../model/services/studentServices.js';
 
 async function deleteStudent(req: express.Request, res: express.Response){
     const studentId = req.body.student;
