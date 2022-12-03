@@ -1,5 +1,5 @@
 import express from 'express';
-import {router} from './routes/router';
+import {router} from './routes/router.js';
 import path from 'path';
 import * as dotenv from 'dotenv';
 const methodOverride = require('method-override');//to-do with import

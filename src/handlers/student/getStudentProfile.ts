@@ -6,14 +6,19 @@ import axios from 'axios';
 
 async function getStudentProfile(req: express.Request, res: express.Response){
     
-    const targetStudentId: number = 1; 
-    //const targetStudent = await fetch(`http://localhost:3000/students/${targetStudentId}`);
-    const targetStudent = await axios(`http://localhost:3000/students/${targetStudentId}`);
-    //const targetStudent: Student = axiosResponse.data;
-    console.log(targetStudent);
-    res.render("pages/studentProfileUpdater", {
-        student: targetStudent.data
-    });
+
+    if (req.session.email){
+        const targetStudentId: number = 3; //TO-DO: cambiar todo eso para funcionar con el email
+        const targetStudent = await axios(`http://localhost:3000/students/${targetStudentId}`);
+        //TODO const targetStudent: Student = axiosResponse.data;
+    
+        res.render("pages/studentProfileUpdater", {
+            student: targetStudent.data
+        });
+    } else {
+        res.status(401).send("no tienes permisos de acceso");
+    }
+    
 }
 
 export {getStudentProfile};

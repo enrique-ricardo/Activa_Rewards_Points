@@ -2,6 +2,7 @@ export {};
 
 declare module 'express-session' {
     interface SessionData {
-        email: string
+        email: string,
+        token:string
     }
 }

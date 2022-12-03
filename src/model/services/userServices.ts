@@ -1,6 +1,8 @@
 import { User } from "../types/User.js";
 import {RowDataPacket} from "mysql2";
 import { db } from "../../config";
+import { OkPacket } from "mysql2";
+import bcrypt from 'bcrypt';
 
 function findOneUser(user_email: string, callback: Function){
  
@@ -13,5 +15,16 @@ function findOneUser(user_email: string, callback: Function){
       callback(null, userFound);
     })
   };
+  async function insertOneUser(user: User, callback: Function){
+    const queryString = "INSERT INTO user(email, password, role, createdAt) VALUES(?, ?, ?, NOW())";
+    const hashPassword = await bcrypt.hash(user.password, 10);
+    db.query(queryString, [user.email, hashPassword, user.role], (err, result)=>{
+      if (err) {
+        callback(err, null);
+      }
+      const userId = (<OkPacket> result).insertId;
+      callback(null, userId);
+    });
+}
 
-export {findOneUser};
+export {findOneUser, insertOneUser};
