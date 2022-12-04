@@ -27,6 +27,7 @@ router.get("/students/:id_student", getOneStudent_js_1.getOneStudent);
 router.delete("/students/:id_student", validateToken_js_1.validateToken, userIsAdmin_js_1.userIsAdmin, deleteOneStudent_js_1.deleteStudent);
 router.put("/students/:id_student", updateOneStudent_js_1.updateOneStudent);
 router.patch("/students/:id_student", patchOneStudent_js_1.patchOneStudent);
-router.post("/logUser", logUser_js_1.userValidation);
+router.post("/index", logUser_js_1.userValidation);
+router.post("/createNewStudent", insertStudent_js_1.insertStudent);
 router.get("/users/:user_email", getOneUser_js_1.getOneUser);
 router.post("/users", insertUser_js_1.insertUser);

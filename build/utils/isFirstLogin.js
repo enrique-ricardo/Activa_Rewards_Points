@@ -12,27 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userValidation = void 0;
-const axios_1 = __importDefault(require("axios"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
+exports.isFirstLogin = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-function userValidation(req, res) {
+function isFirstLogin(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const result = yield axios_1.default.get(`http://localhost:3000/users/${req.body.email}`);
-        if (result.data) {
-            const user = result.data;
-            if (yield bcrypt_1.default.compare(req.body.password, user.password)) {
-                const token = jsonwebtoken_1.default.sign({ "email": user.email, "role": user.role }, process.env.SESSION_SECRET);
-                req.session.token = token;
-                //res.status(200).json(token);
-                if (user.isFirstLogin)
-                    return res.redirect('http://localhost:3000/createNewStudent.html');
+        if (req.session.token != undefined) {
+            const tokenVerified = yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
+            const myTokenVerified = tokenVerified;
+            if (myTokenVerified.role == "admin") {
+                next();
             }
-            res.render("pages/login", { errorMessage: "El usuario y la contraseña no coinciden" });
-        }
-        else {
-            res.render("pages/login", { errorMessage: "404. No existe ese usuario" });
+            else {
+                res.status(401).json({ "message": "Not Authorized" });
+            }
         }
     });
 }
-exports.userValidation = userValidation;
+exports.isFirstLogin = isFirstLogin;
