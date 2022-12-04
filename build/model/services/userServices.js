@@ -16,7 +16,7 @@ exports.insertOneUser = exports.findOneUser = void 0;
 const config_1 = require("../../config");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 function findOneUser(user_email, callback) {
-    const queryString = "SELECT id, email, password, role FROM user WHERE email = ?";
+    const queryString = "SELECT id, email, password, role, isFirstLogin FROM user WHERE email = ?";
     config_1.db.query(queryString, [user_email], (err, result) => {
         if (err) {
             callback(err, null);

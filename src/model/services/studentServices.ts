@@ -6,11 +6,11 @@ import {buildPatchQuery} from '../../utils/buildPatchQuery.js';
 import mysqlPromise from "mysql2/promise";
 
 function createStudent(student: Student, callback: Function){
-    const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, phone_number, zip_code) VALUES (?, ?, ?, ?, ?, ?)"
   
     db.query(
       queryString,
-      [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.activaEmailAddress, student.phoneNumber, student.zipCode],
+      [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.phoneNumber, student.zipCode],
       (err, result) => {
         if (err) {callback(err, null)};
         
