@@ -12,21 +12,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getStudentProfile = void 0;
-const axios_1 = __importDefault(require("axios"));
-function getStudentProfile(req, res) {
+exports.userIsAdmin = void 0;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+function userIsAdmin(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (req.session.email) {
-            const targetStudentId = 3; //TO-DO: cambiar todo eso para funcionar con el email
-            const targetStudent = yield (0, axios_1.default)(`http://localhost:3000/students/${targetStudentId}`);
-            //TODO const targetStudent: Student = axiosResponse.data;
-            res.render("pages/studentProfileUpdater", {
-                student: targetStudent.data
-            });
-        }
-        else {
-            res.status(401).send("no tienes permisos de acceso");
+        if (req.session.token != undefined) {
+            const tokenVerified = yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
+            const myTokenVerified = tokenVerified;
+            if (myTokenVerified.role == "admin") {
+                next();
+            }
+            else {
+                res.status(401).json({ "message": "Not Authorized" });
+            }
         }
     });
 }
-exports.getStudentProfile = getStudentProfile;
+exports.userIsAdmin = userIsAdmin;

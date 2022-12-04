@@ -14,14 +14,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userValidation = void 0;
 const axios_1 = __importDefault(require("axios"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function userValidation(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = yield axios_1.default.get(`http://localhost:3000/users/${req.body.email}`);
         if (result.data) {
             const user = result.data;
-            if (req.body.password == result.data.password) {
-                req.session.email = result.data.email;
-                res.send("LOGIN OK");
+            if (yield bcrypt_1.default.compare(req.body.password, user.password)) {
+                const token = jsonwebtoken_1.default.sign({ "email": user.email, "role": user.role }, process.env.SESSION_SECRET);
+                req.session.token = token;
+                console.log(token);
+                res.status(200).json(token);
             }
             else {
                 res.render("pages/login", { errorMessage: "El usuario y la contraseña no coinciden" });

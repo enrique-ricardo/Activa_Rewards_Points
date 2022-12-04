@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/styleNewCreateUser.css">
+    <title>Creación de usuarios</title>
+</head>
+
+<body>
+    <div class="contenedor_general">
+        <div id="prueba">
+            <img id="logoXarxatec_created_user" src="img/logo-x-activa-movil-w412.png" alt="Titulo">
+            <img id="imagenLogoXarxatec_created_user" src="img/login-img.svg" alt="LogoEnMovimiento">
+        </div>
+
+        <p>Crear nuevo usuario</p>
+
+            <form action="/users" method="POST">
+                <p>
+                    <img class="iconLogin" src="img/login-icono-usuario.png" alt="usuario">
+                    <input type="email" name="email" id="email" placeholder=    "e-mail">
+                </p>
+
+                <p>
+                    <img class="iconLogin" src="img/login-icono-clave.png" alt="clave">
+                    <input type="text" name="password" id="pass" placeholder="  Contraseña">
+                </p>
+
+                <p>
+                    <select id="btn_select_rol" name="role">
+                        <option value="student">Estudiante</option>
+                        <option value="admin">Administrador</option>
+                        <option value="professional">Profesional</option>
+                    </select>
+                </p>
+    
+                <button id="btn_create_user" type="submit">REGISTRAR</button>
+            
+        </form>
+    </div>
+</body>
+
+</html>
