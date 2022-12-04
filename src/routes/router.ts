@@ -25,13 +25,15 @@ router.get("/students/:id_student", getOneStudent);
 
 //router.delete("/students", deleteStudent);
 
-router.delete("/students/:id_student", validateToken, userIsAdmin ,deleteStudent);
+router.delete("/students/:id_student", validateToken, userIsAdmin,  deleteStudent);
 
 router.put("/students/:id_student", updateOneStudent);
 
 router.patch("/students/:id_student", patchOneStudent);
 
-router.post("/logUser", userValidation);
+router.post("/index", userValidation);
+
+router.post("/createNewStudent", insertStudent);
 
 router.get("/users/:user_email", getOneUser);
 

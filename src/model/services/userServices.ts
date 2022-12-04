@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 
 function findOneUser(user_email: string, callback: Function){
  
-    const queryString = "SELECT id, email, password, role FROM user WHERE email = ?";
+    const queryString = "SELECT id, email, password, role, isFirstLogin FROM user WHERE email = ?";
     db.query(queryString, [user_email], (err, result)=>{
       if(err){ 
         callback(err, null);

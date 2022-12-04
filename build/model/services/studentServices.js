@@ -17,8 +17,8 @@ const config_js_1 = require("../../config.js");
 const buildPatchQuery_js_1 = require("../../utils/buildPatchQuery.js");
 const promise_1 = __importDefault(require("mysql2/promise"));
 function createStudent(student, callback) {
-    const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    config_js_1.db.query(queryString, [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.activaEmailAddress, student.phoneNumber, student.zipCode], (err, result) => {
+    const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, phone_number, zip_code) VALUES (?, ?, ?, ?, ?, ?)";
+    config_js_1.db.query(queryString, [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.phoneNumber, student.zipCode], (err, result) => {
         if (err) {
             callback(err, null);
         }
