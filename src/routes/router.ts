@@ -33,7 +33,7 @@ router.patch("/students/:id_student", patchOneStudent);
 
 router.post("/index", userValidation);
 
-router.post("/createNewStudent", insertStudent);
+//router.post("students/createNewStudent", insertStudent);
 
 router.get("/users/:user_email", getOneUser);
 

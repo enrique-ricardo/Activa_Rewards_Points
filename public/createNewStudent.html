@@ -4,42 +4,94 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/styleProfile.css">
     <title>Formulario de contacto</title>
 </head>
 <body>
-    <form action="/students" method="post">
-        <p>
-            <label for="name">Nombre: </label>
-            <input type="text" id="name_field" name="name">
-        </p>
-        <p>
-            <label for="first_surname">Primer apellido: </label>
-            <input type="text" id="first_surname_field" name="firstSurname">
-        </p>
-        <p>
-            <label for="second_surname">Segundo apellido: </label>
-            <input type="text" id="second_surname" name="secondSurname">
-        </p>
-        <p>
-            <label for="email_personal">Email personal: </label>
-            <input type="email" id="personal_email" name="personalEmailAddress">
-        </p>
+    <nav id="menu">
         
-        <p>
-            <label for="phone_number">Teléfono: </label>
-            <input type="tel" id="phone_number" name="phoneNumber">
-        </p>
-        <p>
-            <label for="zip_code">Código postal: </label>
-            <input type="text" id="zip_code" name="zipCode">
-        </p>
-        <p>
-            <label for="prom">Promoción: </label>
-            <input type="text" id="prom" name="prom">
-        </p>
-        <p>
-            <input type="submit">
-        </p>
-    </form>
+        <div id="menu">
+            <div hidden class="menuFoot">
+              <a href="#"><img src="img/iconosMenu/mis-puntos-red.svg" alt="points"></a>
+              <p class="red">Mis puntos</p>
+            </div>
+            <div hidden class="menuFoot">
+              <a href="ranking.html"><img src="img/iconosMenu/ranking-gray.svg" alt="ranking"></a>
+              <p>Ranking</p>
+            </div>
+            <div class="menuFoot">
+              <a href="#"><img src="img/iconosMenu/mi-perfil-gray.svg" alt="perfil"></a>
+              <p class="red">Mi perfil</p>
+            </div>
+            <div hidden class="menuFoot">
+              <a href="login.html"><img src="img/iconosMenu/logout-gray.svg" alt="exit"></a>
+              <p>Salir</p>
+            </div>
+          </div>
+        
+    </nav> 
+    <main class="grid">
+        <div class="item item-a">
+            <h2 class="title">Mis datos:</h2>
+            <br>
+            <form action="/students/createNewStudent" method="post">
+                <p>
+                    <label for="name">Nombre: </label>
+                    <input type="text" class="input-form" id="name_field" name="name">
+                </p>
+                <p>
+                    <label for="first_surname">Primer apellido: </label>
+                    <input type="text" class="input-form" id="first_surname_field" name="firstSurname">
+                </p>
+                <p>
+                    <label for="second_surname">Segundo apellido: </label>
+                    <input type="text" class="input-form" id="second_surname" name="secondSurname">
+                </p>
+                <p>
+                    <label for="email_personal">Email personal: </label>
+                    <input type="email" class="input-form" id="personal_email" name="personalEmailAddress">
+                </p>
+        
+                <p>
+                    <label for="phone_number">Teléfono: </label>
+                    <input type="tel" class="input-form" id="phone_number" name="phoneNumber">
+                </p>
+                <p>
+                    <label for="zip_code">Código postal: </label>
+                    <input type="text" class="input-form" id="zip_code" name="zipCode">
+                </p>
+                <p>
+                    <label for="prom">Promoción: </label>
+                    <input type="text" class="input-form" id="prom" name="prom">
+                </p>
+                <br>
+                <p>
+                    <input type="submit" id="input-send">
+                </p>
+
+            </form>
+    
+        </div> 
+
+        <div class="item item-b">
+            <h2 class="title">Mi Fotografía:</h2>
+            <form action="POST">
+                <input type="file" id="input-myPicture" name="myPicture" accept="image/png, image/jpeg" onchange="mostrar()"> 
+                <input type="submit" id="input-upload" name="submit" value="Upload"/> 
+                <br>
+                <img id="img"/>
+            </form>
+        </div>
+        <hr />
+
+        <div class="item item-c">
+            <h2 class="title">Mi currículo:</h2>
+            <form action="POST"></form>
+                <input type="file" id="input-myCV" name="myCV">
+                <input type="submit" id="input-upload" name="submit" value="Upload"/> 
+            </form>
+        </div>
+        <hr />
+    </main> 
 </body>
 </html>
