@@ -41,8 +41,8 @@ p {
     display: flex;
     position: fixed;
     bottom: 0vw;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 5px -5px 20px rgb(190, 190, 190);
+    /*background-color: rgb(255, 255, 255);*/
+    /*box-shadow: 5px -5px 20px rgb(190, 190, 190);*/
     width: 99vw;
     justify-content: space-evenly;
     border-radius: 7vw 7vw 0vw 0vw;
@@ -101,7 +101,22 @@ input[type="file"]::file-selector-button:hover {
   border: 1px solid rgb(224, 0, 77);
   height: 5vh;
   width: 30vh;
-  font-size: 2vh;
+  font-size: 1.5vh;
+}
+
+#description{
+  color: grey;
+  border-radius: 1vh;
+  border: 1px solid rgb(224, 0, 77);
+  font-size: 1vh;
+
+}
+
+label{
+  display: inline-block;
+  width: 90px;
+  font-size: 1.2vh;
+  
 }
 
 /*#enter {
@@ -118,8 +133,8 @@ input[type="file"]::file-selector-button:hover {
     display: flex;
     position: fixed;
     bottom: 0vw;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 5px -5px 20px rgb(190, 190, 190);
+    /*background-color: rgb(255, 255, 255);*/
+    /*box-shadow: 5px -5px 20px rgb(190, 190, 190);*/
     width: 99vw;
     justify-content:space-evenly;
     border-radius: 7vw 7vw 0vw 0vw;
@@ -141,8 +156,8 @@ input[type="file"]::file-selector-button:hover {
         display: flex;
         position: fixed;
         bottom: 0vw;
-        background-color: rgb(255, 255, 255);
-        box-shadow: 5px -5px 20px rgb(190, 190, 190);
+        /*background-color: rgb(255, 255, 255);*/
+        /*box-shadow: 5px -5px 20px rgb(190, 190, 190);*/
         width: 100vw;
         margin-left: -5vw;
         justify-content: space-evenly;
@@ -185,7 +200,7 @@ input[type="file"]::file-selector-button:hover {
         justify-content: center;
         border-radius: 0vw;
         background-color: rgb(7, 29, 73);
-        box-shadow: 5px -5px 20px rgb(255, 255, 255);
+        /*box-shadow: 5px -5px 20px rgb(255, 255, 255);*/
       }
     
       .menuFoot p {
