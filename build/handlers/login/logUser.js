@@ -22,7 +22,7 @@ function userValidation(req, res) {
         if (result.data) {
             const user = result.data;
             if (yield bcrypt_1.default.compare(req.body.password, user.password)) {
-                const token = jsonwebtoken_1.default.sign({ "email": user.email, "role": user.role }, process.env.SESSION_SECRET);
+                const token = jsonwebtoken_1.default.sign({ "email": user.email, "role": user.role, "id": user.id }, process.env.SESSION_SECRET);
                 req.session.token = token;
                 //res.status(200).json(token);
                 if (user.isFirstLogin)

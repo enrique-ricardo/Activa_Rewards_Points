@@ -6,15 +6,16 @@ import {buildPatchQuery} from '../../utils/buildPatchQuery.js';
 import mysqlPromise from "mysql2/promise";
 
 function createStudent(student: Student, callback: Function){
-    const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, phone_number, zip_code) VALUES (?, ?, ?, ?, ?, ?)"
+    const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, phone_number, avatar, cv, description, zip_code, id_user, prom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
   
     db.query(
       queryString,
-      [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.phoneNumber, student.zipCode],
+      [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.phoneNumber, student.avatar,  student.cv, student.description, student.zip_code, student.id_user, student.prom],
       (err, result) => {
         if (err) {callback(err, null)};
-        
+        console.log(result);
         const insertId = (<OkPacket> result).insertId;
+        
         callback(null, insertId);
       }
     );
@@ -32,7 +33,7 @@ function findAllStudents(callback:Function){
 
 function findOneStudent(id: string, callback: Function){
  
-  const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code FROM student WHERE id = ?";
+  const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, avatar, cv, description, zip_code, prom, activa_points_balance FROM student WHERE id = ?";
   db.query(queryString, [id], (err, result)=>{
     if(err){ callback(err, null)};
     
@@ -63,7 +64,7 @@ function deleteOneStudent(id: string, callback: Function){
 function putOneStudent(id: string, student: Student, callback: Function){
 
     const queryString = "UPDATE student SET name=?, first_surname=?, second_surname=?, email_personal=?, email_activa=?, phone_number=?, zip_code=? WHERE id=?";
-    db.query(queryString, [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.activaEmailAddress, student.phoneNumber, student.zipCode, id],
+    db.query(queryString, [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.activaEmailAddress, student.phoneNumber, student.zip_code, id],
       (err, result)=>{
         if(err){ callback(err, null)};
         

@@ -9,7 +9,6 @@
 </head>
 <body>
     <nav id="menu">
-        <!-- cometario de prueba-->
         
         <div id="menu">
             <div hidden class="menuFoot">
@@ -35,7 +34,7 @@
         <div class="item item-a">
             <h2 class="title">Mis datos:</h2>
             <br>
-            <form action="/students/createNewStudent" method="post">
+            <form action="/students" method="post">
                 <p>
                     <label for="name">Nombre: </label>
                     <input type="text" class="input-form" id="name_field" name="name">
@@ -66,6 +65,11 @@
                     <input type="text" class="input-form" id="prom" name="prom">
                 </p>
                 <br>
+                <div class="item item-b">
+                    <h2 class="title">Mi Descripción:</h2>
+                    <p><textarea name="description" id="description" cols="30" rows="10"></textarea></p>
+                </div>
+                <br>
                 <p>
                     <input type="submit" id="input-send">
                 </p>
@@ -73,24 +77,21 @@
             </form>
     
         </div> 
-
+        
         <div class="item item-b">
             <h2 class="title">Mi Fotografía:</h2>
-            <form action="POST">
-                <input type="file" id="input-myPicture" name="myPicture" accept="image/png, image/jpeg" onchange="mostrar()"> 
+    
+                <input type="file" id="input-myPicture" name="avatar" accept="image/png, image/jpeg"> 
                 <input type="submit" id="input-upload" name="submit" value="Upload"/> 
-                <br>
-                <img id="img"/>
-            </form>
+              
         </div>
         <hr />
-
+       
         <div class="item item-c">
             <h2 class="title">Mi currículo:</h2>
-            <form action="POST"></form>
-                <input type="file" id="input-myCV" name="myCV">
+
+                <input type="file" id="input-myCV" name="myCV" accept="application/pdf" >
                 <input type="submit" id="input-upload" name="submit" value="Upload"/> 
-            </form>
         </div>
         <hr />
     </main> 
