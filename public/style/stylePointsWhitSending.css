@@ -24,8 +24,8 @@ h2 {
   display: flex;
   position: fixed;
   bottom: 0vw;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 5px -5px 20px rgb(190, 190, 190);
+ /*background-color: rgb(255, 255, 255);*/
+  /*box-shadow: 5px -5px 20px rgb(190, 190, 190);*/
   width: 99vw;
   justify-content: space-evenly;
   border-radius: 7vw 7vw 0vw 0vw;
@@ -250,8 +250,8 @@ select {
     display: flex;
     position: fixed;
     bottom: 0vw;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 5px -5px 20px rgb(190, 190, 190);
+    /*background-color: rgb(255, 255, 255);*/
+    /*box-shadow: 5px -5px 20px rgb(190, 190, 190);*/
     width: 100vw;
     margin-left: -5vw;
     justify-content: space-evenly;
@@ -398,7 +398,7 @@ select {
     justify-content: center;
     border-radius: 0vw;
     background-color: rgb(7, 29, 73);
-  box-shadow: 5px -5px 20px rgb(255, 255, 255);
+  /*box-shadow: 5px -5px 20px rgb(255, 255, 255);*/
   }
 
   .menuFoot p {
