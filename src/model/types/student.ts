@@ -8,10 +8,9 @@ export interface Student {
     phoneNumber: string,
     avatar:Blob,
     cv: Blob,
-    zip_code: string,
+    zipCode: string,
     prom: number,
     activaPointsBalance: number,
-    id_user:number,
     description:string
 
 }
