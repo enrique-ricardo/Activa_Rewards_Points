@@ -26,8 +26,7 @@ function userValidation(req, res) {
                 // req.session.token = token;
                 // const verified = jsonwebtoken.verify(token, process.env.SESSION_SECRET!)
                 // console.log(verified)
-                if (user.isFirstLogin)
-                    return res.redirect('http://localhost:3000/createNewStudent.html');
+                if (user.isFirstLogin) return res.redirect('http://localhost:3000/createNewStudent.html');
                 res.render("pages/login", { errorMessage: "Login succesfull!!!!!" });
             }
             else {
