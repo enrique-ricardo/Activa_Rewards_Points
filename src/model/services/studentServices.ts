@@ -5,19 +5,19 @@ import {LooseObject} from '../types/LooseObject.js';
 import {buildPatchQuery} from '../../utils/buildPatchQuery.js';
 import mysqlPromise from "mysql2/promise";
 import { jwtToken } from '../types/jwtToken' 
-
-function createStudent(student: Student, callback: Function){
+import { updateUserIsFirstLogin } from '../services/userServices'
+function createStudent(student: Student, userData:jwtToken, callback: Function){
     const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, phone_number, avatar, cv, description, zip_code, id_user, prom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
     
     db.query(
       queryString,
-      [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.phoneNumber, student.avatar,  student.cv, student.description, student.zipCode, student.id, student.prom],
+      [student.name, student.firstSurname, student.secondSurname, userData.email, student.phoneNumber, student.avatar,  student.cv, student.description, student.zipCode , userData.id, student.prom],
       (err, result) => {
         console.log(err);
         if (err) {callback(err, null)};
         console.log(result);
         const insertId = (<OkPacket> result).insertId;
-        
+        updateUserIsFirstLogin(userData.email)
         callback(null, insertId);
       }
     );

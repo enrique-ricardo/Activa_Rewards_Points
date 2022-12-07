@@ -4,6 +4,7 @@ import express from 'express';
 import axios from "axios";
 import bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
 async function userValidation(req: express.Request, res: express.Response){
 
@@ -11,16 +12,22 @@ async function userValidation(req: express.Request, res: express.Response){
         if (result.data){
             const user: User = result.data;
             if (await bcrypt.compare(req.body.password, user.password)){
-                const token = jsonwebtoken.sign({"email": user.email, "role": user.role, "id": user.id}, process.env.SESSION_SECRET!)
-                req.session.token = token;
-                //res.status(200).json(token);
-
+                const token = jsonwebtoken.sign({"email": user.email, "role": user.role, "id": user.id, "isFirstLogin": user.isFirstLogin}, process.env.SESSION_SECRET!)
+                // req.session.token = token;
+                // const verified = jsonwebtoken.verify(token, process.env.SESSION_SECRET!)
+                // console.log(verified)
                 if(user.isFirstLogin) return res.redirect('http://localhost:3000/createNewStudent.html');
-
+                res.render("pages/login", {errorMessage: "Login succesfull!!!!!"});
             } 
-            return res.render("pages/login", {errorMessage: "El usuario y la contraseña no coinciden"});
-        } 
-            return res.render("pages/login", {errorMessage: "404. No existe ese usuario"});
+            else {
+                res.render("pages/login", {errorMessage: "El usuario y la contraseña no coinciden"});
+            }
+            
+             
+        } else {
+            res.render("pages/login", {errorMessage: "404. No existe ese usuario"});
+        }
+           
 }
 
 export {userValidation};

@@ -27,4 +27,12 @@ function findOneUser(user_email: string, callback: Function){
     });
 }
 
-export {findOneUser, insertOneUser};
+const updateUserIsFirstLogin = async (user_email: string) => {
+  const queryString = "UPDATE user SET isFirstLogin=? WHERE email=?";
+  db.query(queryString, [false, user_email],
+    (err, result)=>{
+      if(err) return console.log(err, null);
+      console.log(null, "update succesfull");
+    })
+};
+export {findOneUser, insertOneUser, updateUserIsFirstLogin};
