@@ -6,6 +6,7 @@ import {buildPatchQuery} from '../../utils/buildPatchQuery.js';
 import mysqlPromise from "mysql2/promise";
 import { jwtToken } from '../types/jwtToken' 
 import { updateUserIsFirstLogin } from '../services/userServices'
+
 function createStudent(student: Student, userData:jwtToken, callback: Function){
     const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, phone_number, avatar, cv, description, zip_code, id_user, prom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
     
