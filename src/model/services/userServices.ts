@@ -15,6 +15,18 @@ function findOneUser(user_email: string, callback: Function){
       callback(null, userFound);
     })
   };
+ const updateUserIsFirstLogin =async (user_email:string)=>{
+  const queryString = "UPDATE user SET isFirstLogin=? WHERE email=?";
+
+  db.query(queryString, [false, user_email],
+    (err, result)=>{
+      if(err) return console.log(err, null);
+      console.log(null, "update succesfull");
+
+    })
+
+};
+ 
   async function insertOneUser(user: User, callback: Function){
     const queryString = "INSERT INTO user(email, password, role, createdAt) VALUES(?, ?, ?, NOW())";
     const hashPassword = await bcrypt.hash(user.password, 10);
@@ -27,4 +39,4 @@ function findOneUser(user_email: string, callback: Function){
     });
 }
 
-export {findOneUser, insertOneUser};
+export {findOneUser, insertOneUser,updateUserIsFirstLogin};

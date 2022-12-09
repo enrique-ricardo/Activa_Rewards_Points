@@ -30,4 +30,4 @@ router.patch("/students/:id_student", patchOneStudent_js_1.patchOneStudent);
 router.post("/index", logUser_js_1.userValidation);
 //router.post("students/createNewStudent", insertStudent);
 router.get("/users/:user_email", getOneUser_js_1.getOneUser);
-router.post("/users", insertUser_js_1.insertUser);
+router.post("/users", validateToken_js_1.validateToken, userIsAdmin_js_1.userIsAdmin, insertUser_js_1.insertUser);

@@ -15,17 +15,21 @@ async function userValidation(req: express.Request, res: express.Response){
                 const token = jsonwebtoken.sign({"email": user.email, "role": user.role, "id": user.id}, process.env.SESSION_SECRET!)
                 req.session.token = token;
                 console.log(token);
-                //res.status(200).json(token);
 
                 if(user.isFirstLogin) return res.redirect('http://localhost:3000/createNewStudent.html');
+            
+
+                   // if(user.isFirstLogin)return res.render("pages/index");
+
 
             } else {
                 res.render("pages/login", {errorMessage: "El usuario y la contraseña no coinciden"});
-            } 
+            }
         } else {
             res.render("pages/login", {errorMessage: "404. No existe ese usuario"});
         }
            
 }
+
 
 export {userValidation};

@@ -16,15 +16,17 @@ exports.findOneStudentForPatch = exports.patchStudent = exports.putOneStudent = 
 const config_js_1 = require("../../config.js");
 const buildPatchQuery_js_1 = require("../../utils/buildPatchQuery.js");
 const promise_1 = __importDefault(require("mysql2/promise"));
-function createStudent(student, callback) {
-    const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, phone_number, avatar, cv, description, zip_code, id_user, prom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
-    config_js_1.db.query(queryString, [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.phoneNumber, student.avatar, student.cv, student.description, student.zip_code, student.id_user, student.prom], (err, result) => {
+const userServices_js_1 = require("./userServices.js");
+function createStudent(student, id_user, email_user, callback) {
+    const queryString = `INSERT INTO student (name, first_surname, second_surname, email_activa, email_personal, phone_number, description, zip_code, id_user, prom ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    config_js_1.db.query(queryString, [student.name, student.firstSurname, student.secondSurname, email_user, student.personalEmailAddress, student.phoneNumber, student.description, student.zipCode, id_user, student.prom], (err, result) => {
         if (err) {
             callback(err, null);
         }
         ;
         console.log(result);
         const insertId = result.insertId;
+        (0, userServices_js_1.updateUserIsFirstLogin)(email_user);
         callback(null, insertId);
     });
 }
@@ -78,7 +80,7 @@ exports.deleteOneStudent = deleteOneStudent;
 ;
 function putOneStudent(id, student, callback) {
     const queryString = "UPDATE student SET name=?, first_surname=?, second_surname=?, email_personal=?, email_activa=?, phone_number=?, zip_code=? WHERE id=?";
-    config_js_1.db.query(queryString, [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.activaEmailAddress, student.phoneNumber, student.zip_code, id], (err, result) => {
+    config_js_1.db.query(queryString, [student.name, student.firstSurname, student.secondSurname, student.personalEmailAddress, student.activaEmailAddress, student.phoneNumber, student.zipCode, id], (err, result) => {
         if (err) {
             callback(err, null);
         }

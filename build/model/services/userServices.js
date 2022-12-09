@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.insertOneUser = exports.findOneUser = void 0;
+exports.updateUserIsFirstLogin = exports.insertOneUser = exports.findOneUser = void 0;
 const config_1 = require("../../config");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 function findOneUser(user_email, callback) {
@@ -28,6 +28,15 @@ function findOneUser(user_email, callback) {
 }
 exports.findOneUser = findOneUser;
 ;
+const updateUserIsFirstLogin = (user_email) => __awaiter(void 0, void 0, void 0, function* () {
+    const queryString = "UPDATE user SET isFirstLogin=? WHERE email=?";
+    config_1.db.query(queryString, [false, user_email], (err, result) => {
+        if (err)
+            return console.log(err, null);
+        console.log(null, "update succesfull");
+    });
+});
+exports.updateUserIsFirstLogin = updateUserIsFirstLogin;
 function insertOneUser(user, callback) {
     return __awaiter(this, void 0, void 0, function* () {
         const queryString = "INSERT INTO user(email, password, role, createdAt) VALUES(?, ?, ?, NOW())";
