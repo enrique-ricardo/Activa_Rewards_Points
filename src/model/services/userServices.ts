@@ -17,7 +17,7 @@ function findOneUser(user_email: string, callback: Function){
   };
  const updateUserIsFirstLogin =async (user_email:string)=>{
   const queryString = "UPDATE user SET isFirstLogin=? WHERE email=?";
-
+  
   db.query(queryString, [false, user_email],
     (err, result)=>{
       if(err) return console.log(err, null);

@@ -17,7 +17,7 @@ async function userValidation(req: express.Request, res: express.Response){
                 console.log(token);
 
                 if(user.isFirstLogin) return res.redirect('http://localhost:3000/createNewStudent.html');
-            
+                
 
                    // if(user.isFirstLogin)return res.render("pages/index");
 
