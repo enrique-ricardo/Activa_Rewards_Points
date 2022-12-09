@@ -4,21 +4,20 @@ import {OkPacket, RowDataPacket} from "mysql2";
 import {LooseObject} from '../types/LooseObject.js';
 import {buildPatchQuery} from '../../utils/buildPatchQuery.js';
 import mysqlPromise from "mysql2/promise";
-import { jwtToken } from '../types/jwtToken' 
-import { updateUserIsFirstLogin } from '../services/userServices'
+import { updateUserIsFirstLogin } from './userServices.js';
 
-function createStudent(student: Student, userData:jwtToken, callback: Function){
-    const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, phone_number, avatar, cv, description, zip_code, id_user, prom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
-    
+function createStudent(student: Student, id_user: number, email_user: string, callback: Function){
+    const queryString = `INSERT INTO student (name, first_surname, second_surname, email_activa, email_personal, phone_number, description, zip_code, id_user, prom ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+  
     db.query(
       queryString,
-      [student.name, student.firstSurname, student.secondSurname, userData.email, student.phoneNumber, student.avatar,  student.cv, student.description, student.zipCode , userData.id, student.prom],
+      [student.name, student.firstSurname, student.secondSurname, email_user, student.personalEmailAddress, student.phoneNumber, student.description, student.zipCode, id_user, student.prom],
       (err, result) => {
         console.log(err);
         if (err) {callback(err, null)};
         console.log(result);
         const insertId = (<OkPacket> result).insertId;
-        updateUserIsFirstLogin(userData.email)
+        updateUserIsFirstLogin (email_user);
         callback(null, insertId);
       }
     );

@@ -22,13 +22,12 @@ function userValidation(req, res) {
         if (result.data) {
             const user = result.data;
             if (yield bcrypt_1.default.compare(req.body.password, user.password)) {
-                const token = jsonwebtoken_1.default.sign({ "email": user.email, "role": user.role, "id": user.id, "isFirstLogin": user.isFirstLogin }, process.env.SESSION_SECRET);
-                // req.session.token = token;
-                // const verified = jsonwebtoken.verify(token, process.env.SESSION_SECRET!)
-                // console.log(verified)
+                const token = jsonwebtoken_1.default.sign({ "email": user.email, "role": user.role, "id": user.id }, process.env.SESSION_SECRET);
+                req.session.token = token;
+                console.log(token);
                 if (user.isFirstLogin)
                     return res.redirect('http://localhost:3000/createNewStudent.html');
-                res.render("pages/login", { errorMessage: "Login succesfull!!!!!" });
+                // if(user.isFirstLogin)return res.render("pages/index");
             }
             else {
                 res.render("pages/login", { errorMessage: "El usuario y la contraseña no coinciden" });

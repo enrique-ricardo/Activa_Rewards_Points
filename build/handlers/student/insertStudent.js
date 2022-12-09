@@ -18,20 +18,24 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function insertStudent(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const newStudent = req.body;
-        let userData;
-        if (req.session.token == undefined) {
-            return res.status(401).json("Ningun usuario encontrado!!!");
+        if (req.session.token != undefined) {
+            const tokenVerified = yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
+            const myTokenVerified = tokenVerified;
+            const idUser = myTokenVerified.id;
+            const emailUser = myTokenVerified.email;
+            (0, studentServices_js_1.createStudent)(newStudent, idUser, emailUser, (err, studentId) => {
+                if (err) {
+                    res.status(500).json({ "message": err.message });
+                }
+                else {
+                    /*res.status(200).json({"orderId": studentId});*/
+                    res.render("pages/index");
+                }
+            });
         }
         else {
-            const tokenVerified = yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
-            userData = tokenVerified;
+            res.status(401).json({ "message": "Es obligatorio autenticarse antes de realizar esta operación" });
         }
-        (0, studentServices_js_1.createStudent)(newStudent, userData, (err, studentId) => {
-            if (err) {
-                return res.status(500).json({ "message": err.message });
-            }
-            res.status(200).json({ "orderId": studentId });
-        });
     });
 }
 exports.insertStudent = insertStudent;

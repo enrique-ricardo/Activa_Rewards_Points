@@ -16,10 +16,10 @@ exports.findOneStudentForPatch = exports.patchStudent = exports.putOneStudent = 
 const config_js_1 = require("../../config.js");
 const buildPatchQuery_js_1 = require("../../utils/buildPatchQuery.js");
 const promise_1 = __importDefault(require("mysql2/promise"));
-const userServices_1 = require("../services/userServices");
-function createStudent(student, userData, callback) {
-    const queryString = "INSERT INTO student (name, first_surname, second_surname, email_personal, phone_number, avatar, cv, description, zip_code, id_user, prom) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
-    config_js_1.db.query(queryString, [student.name, student.firstSurname, student.secondSurname, userData.email, student.phoneNumber, student.avatar, student.cv, student.description, student.zipCode, userData.id, student.prom], (err, result) => {
+const userServices_js_1 = require("./userServices.js");
+function createStudent(student, id_user, email_user, callback) {
+    const queryString = `INSERT INTO student (name, first_surname, second_surname, email_activa, email_personal, phone_number, description, zip_code, id_user, prom ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    config_js_1.db.query(queryString, [student.name, student.firstSurname, student.secondSurname, email_user, student.personalEmailAddress, student.phoneNumber, student.description, student.zipCode, id_user, student.prom], (err, result) => {
         console.log(err);
         if (err) {
             callback(err, null);
@@ -27,7 +27,7 @@ function createStudent(student, userData, callback) {
         ;
         console.log(result);
         const insertId = result.insertId;
-        (0, userServices_1.updateUserIsFirstLogin)(userData.email);
+        (0, userServices_js_1.updateUserIsFirstLogin)(email_user);
         callback(null, insertId);
     });
 }

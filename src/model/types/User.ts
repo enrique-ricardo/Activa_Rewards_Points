@@ -3,5 +3,6 @@ export interface User {
     email: string,
     password: string,
     role: string,
-    isFirstLogin: boolean
+    isFirstLogin: boolean,
+    lastLog: Date
 }

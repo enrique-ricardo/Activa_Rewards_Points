@@ -37,6 +37,6 @@ router.post("/index", userValidation);
 
 router.get("/users/:user_email", getOneUser);
 
-router.post("/users", insertUser);
+router.post("/users", validateToken,userIsAdmin,insertUser);
 
 export {router};
