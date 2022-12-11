@@ -8,39 +8,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.insertStudent = void 0;
 const studentServices_js_1 = require("../../model/services/studentServices.js");
-const sessionValidation_1 = require("../../utils/sessionValidation");
-// async function insertStudent(req: express.Request, res: express.Response){
-//   const newStudent: Student = req.body;
-//   if (req.session.token != undefined){ 
-//     const tokenVerified = await jsonwebtoken.verify(req.session.token, process.env.SESSION_SECRET!);
-//     const myTokenVerified: jwtToken = <jwtToken>tokenVerified;
-//     const idUser = myTokenVerified.id;
-//     const emailUser = myTokenVerified.email;
-//     createStudent(newStudent, idUser, emailUser, (err: Error, studentId: number) => {
-//       if (err) {
-//         res.status(500).json({"message": err.message});
-//       } else {
-//         /*res.status(200).json({"orderId": studentId});*/
-//         res.render("pages/index");
-//       }
-//      });
-//   } else {
-//     res.status(401).json({"message": "Es obligatorio autenticarse antes de realizar esta operación"});
-//   }
-// };
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function insertStudent(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const sessionToken = (0, sessionValidation_1.getSessionToken)(req, res);
         const newStudent = req.body;
-        if (sessionToken != undefined) {
-            (0, studentServices_js_1.createStudent)(newStudent, sessionToken.idUser, sessionToken.emailUser, (err, studentId) => {
+        if (req.session.token != undefined) {
+            const tokenVerified = yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
+            const myTokenVerified = tokenVerified;
+            const idUser = myTokenVerified.id;
+            const emailUser = myTokenVerified.email;
+            (0, studentServices_js_1.createStudent)(newStudent, idUser, emailUser, (err, studentId) => {
                 if (err) {
                     res.status(500).json({ "message": err.message });
                 }
                 else {
+                    /*res.status(200).json({"orderId": studentId});*/
                     res.render("pages/index");
                 }
             });

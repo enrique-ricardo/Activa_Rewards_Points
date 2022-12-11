@@ -1,4 +1,4 @@
-import {Reward} from '../types/reward';
+import {Reward} from '../types/reward.js';
 import {db, connectionData} from "../../config.js";
 import {OkPacket, RowDataPacket} from "mysql2";
 import {LooseObject} from '../types/LooseObject.js';

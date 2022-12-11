@@ -23,18 +23,15 @@ function createStudent(student: Student, id_user: number, email_user: string, ca
     );
   };
 
-const getActivaPointsReward = (id: string, callback: Function) => {
-  const queryString = "SELECT activa_points_balance FROM student WHERE id_user = ?";
-  db.query(queryString, [id], (err, result)=>{
-    if(err){ callback(err, null)};
-    
-    const activaPoints: Student = (<RowDataPacket>result)[0];
-    callback(null, activaPoints);
-  })
-}
-
-
-
+  const getActivaPointsReward = (id: string, callback: Function) => {
+    const queryString = "SELECT activa_points_balance FROM student WHERE id_user = ?";
+    db.query(queryString, [id], (err, result)=>{
+      if(err){ callback(err, null)};
+      
+      const activaPoints: Student = (<RowDataPacket>result)[0];
+      callback(null, activaPoints);
+    })
+  } 
 
 function findAllStudents(callback:Function){
   const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code FROM student";

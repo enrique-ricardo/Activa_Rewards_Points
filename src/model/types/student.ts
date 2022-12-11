@@ -10,6 +10,7 @@ export interface Student {
     zipCode: string,
     prom: number,
     activaPointsBalance: number,
-    description:string
+    description:string,
+    id_user: number
 
 }

@@ -16,8 +16,10 @@ exports.getSessionToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const getSessionToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     if (req.session.token !== undefined) {
-        return yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
+        const tokenVerified = yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
+        const myTokenVerified = tokenVerified;
+        return myTokenVerified.id;
     }
-    return undefined;
+    return;
 });
 exports.getSessionToken = getSessionToken;
