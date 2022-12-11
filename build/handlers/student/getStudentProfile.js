@@ -8,25 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getStudentProfile = void 0;
-const axios_1 = __importDefault(require("axios"));
 function getStudentProfile(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (req.session.email) {
-            const targetStudentId = 3; //TO-DO: cambiar todo eso para funcionar con el email
-            const targetStudent = yield (0, axios_1.default)(`http://localhost:3000/students/${targetStudentId}`);
-            //TODO const targetStudent: Student = axiosResponse.data;
-            res.render("pages/studentProfileUpdater", {
-                student: targetStudent.data
-            });
-        }
-        else {
-            res.status(401).send("no tienes permisos de acceso");
-        }
+        /*  if (req.session.email){
+              const targetStudentId: number = 17; //TO-DO: cambiar todo eso para funcionar con el email
+              const targetStudent = await axios(`http://localhost:3000/students/${targetStudentId}`);
+              //TODO const targetStudent: Student = axiosResponse.data;
+          
+              res.render("pages/studentProfileUpdater", {
+                  student: targetStudent.data
+              });
+          } else {
+              res.status(401).send("no tienes permisos de acceso");
+          }
+          
+      }*/
+        export { getStudentProfile };
     });
 }
-exports.getStudentProfile = getStudentProfile;

@@ -8,7 +8,8 @@ async function getOneStudent(req: express.Request, res: express.Response){
         if(err){
             res.status(404).json({"message": err.message});
         }
-        res.status(200).json(result);
+        //res.status(200).json(result);
+        res.render("pages/studentProfileUpdater");
     })
 }
 

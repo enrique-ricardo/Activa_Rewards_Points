@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="style/stylePointsWhitSending.css">
   <title>Mis puntos</title>
 </head>
-
 <body>
   <div id="menu">
     <div class="menuFoot">
@@ -34,7 +33,7 @@
     <div id="divPiechart">
       <div class="color">
         <div class="piechart1">
-          <div id="numberpie1">350</div>
+          <div id="numberpie1"> <%=student.activa_points_balance%></div>
         </div>
         <p class="pieText">DISPONIBLES<br> ¡Listos para enviar!</p>
       </div>
@@ -129,6 +128,7 @@
     </p>
     <br><br><br><br>
   </div>
+  <input type="hidden" id="id" name="id" value="<%= student.id_user %>">
 </body>
 
 </html>

@@ -27,7 +27,8 @@ function userValidation(req, res) {
                 console.log(token);
                 if (user.isFirstLogin)
                     return res.redirect('http://localhost:3000/createNewStudent.html');
-                // if(user.isFirstLogin)return res.render("pages/index");
+                res.render("pages/index");
+                //res.render('http://localhost:3000/index.html');
             }
             else {
                 res.render("pages/login", { errorMessage: "El usuario y la contraseña no coinciden" });
