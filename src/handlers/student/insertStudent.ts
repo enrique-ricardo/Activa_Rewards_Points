@@ -18,8 +18,7 @@ async function insertStudent(req: express.Request, res: express.Response){
       if (err) {
         res.status(500).json({"message": err.message});
       } else {
-        /*res.status(200).json({"orderId": studentId});*/
-        
+       
         res.render("pages/index");
       }
      });

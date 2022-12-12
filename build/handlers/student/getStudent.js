@@ -9,16 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getStudents = void 0;
+exports.getStudent = void 0;
 const studentServices_js_1 = require("../../model/services/studentServices.js");
-function getStudents(req, res) {
+function getStudent(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        (0, studentServices_js_1.findAllStudents)((err, students) => {
+        const id_user = req.params.id_user;
+        (0, studentServices_js_1.findStudentLogged)(id_user, (err, result) => {
             if (err) {
                 return res.status(404).json({ "message": err.message });
             }
-            res.status(200).json(students);
+            res.status(200).json({ student: result });
         });
     });
 }
-exports.getStudents = getStudents;
+exports.getStudent = getStudent;

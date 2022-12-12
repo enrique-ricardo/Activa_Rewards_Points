@@ -34,8 +34,7 @@
         <div class="item item-a">
             <h2 class="title">Mis datos:</h2>
             <br>
-            <% if (user){ %>
-            <form action="/editStudentProfile/<%= student.id %>" method="post">
+            <form action="/editStudentProfile" method="post">
                 <p>
                     <label for="name">Nombre: </label>
                     <input type="text" class="input-form" id="name_field" name="name"value="<%= student.name %>">
@@ -50,7 +49,7 @@
                 </p>
                 <p>
                     <label for="email_personal">Email personal: </label>
-                    <input type="email" class="input-form" id="personal_email" name="personalEmailAddress" value="<%= student.email_personal %">
+                    <input type="email" class="input-form" id="personal_email" name="personalEmailAddress" value="<%= student.email_personal %>">
                 </p>
         
                 <p>
@@ -97,16 +96,11 @@
                     <input type="submit" id="input-upload" name="submit" value="Upload"/> 
                 </div>
                 <hr />
-                <p>
-                    <label for="update">Actualizar</label>
-                     <input type="submit">
-                </p>
        
                 <input type="hidden" id="id" name="id" value="<%= student.id %>">
             </form>
-            <% } %>
     </main> 
 </body>
 </html>
-       <!--<input type="hidden" name="_method" value="patch">-->
+    
        
