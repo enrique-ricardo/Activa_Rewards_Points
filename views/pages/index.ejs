@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="style/stylePointsWhitSending.css">
   <title>Mis puntos</title>
 </head>
-
 <body>
+ 
   <div id="menu">
     <div class="menuFoot">
       <a href="#"><img src="img/iconosMenu/mis-puntos-red.svg" alt="points"></a>
@@ -20,7 +20,7 @@
       <p>Ranking</p>
     </div>
     <div class="menuFoot">
-      <a href="#"><img src="img/iconosMenu/mi-perfil-gray.svg" alt="perfil"></a>
+      <a href="/getStudentProfile"><img src="img/iconosMenu/mi-perfil-gray.svg" alt="perfil"></a>
       <p>Mi perfil</p>
     </div>
     <div class="menuFoot">
@@ -29,12 +29,12 @@
     </div>
   </div>
   <div>
-    <h1 class="center">MIS PUNTOS</h1>
+    <h1 class="center">PUNTOS DE <%=studentLogged.name %> </h1>
     <hr />
     <div id="divPiechart">
       <div class="color">
         <div class="piechart1">
-          <div id="numberpie1">350</div>
+          <div id="numberpie1"> <%= studentLogged.activa_points_balance %></div>
         </div>
         <p class="pieText">DISPONIBLES<br> ¡Listos para enviar!</p>
       </div>
@@ -52,23 +52,27 @@
     <hr />
     <div id="fondo">
       <p class="center">Alumnos Xarxatec Activa 2023</p>
+      <form action="#" method="post"></form>
       <div class="search">
         <img id="iconActiva" src="img/puntos-activa-logo.svg" alt="logoBuscarGente">
+        
         <select name="alumnos" id="alumnos">
-          <option value="r">Enviar puntos a...</option>
-          <option value="r">Antonio</option>
-          <option value="a">Lydia</option>
-          <option value="v">Juan</option>
+          <option value="">Enviar puntos a...
+          
+          </option>
         </select>
       </div>
       <div class="spanCenter">Descripción del envío</div>
-      <form action="#">
         <div id="textContainerDescription">
           <input id="sendDescription" type="text"></div>
         <div class="spanCenter">¿cuánto envías?</div>
         <div id="numberContainerqty">
-          <input id="pointQty" type="number">
-          <button id="sendPoints">ENVIAR</button></div>
+          <input id="pointQty" name="pointQty" type="number">
+          <input type="hidden" name="senderId" value="<%= studentLogged.id %>">
+        <input type="hidden" name="userSender" value="<%= studentLogged.name %>">
+        <input type="hidden" name="date" value="">
+          <button id="sendPoints">ENVIAR</button>
+        </div>
       </form>
     </div>
   </div>
@@ -129,6 +133,7 @@
     </p>
     <br><br><br><br>
   </div>
+
 </body>
 
 </html>

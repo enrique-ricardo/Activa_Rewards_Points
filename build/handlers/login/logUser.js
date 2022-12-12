@@ -24,10 +24,11 @@ function userValidation(req, res) {
             if (yield bcrypt_1.default.compare(req.body.password, user.password)) {
                 const token = jsonwebtoken_1.default.sign({ "email": user.email, "role": user.role, "id": user.id }, process.env.SESSION_SECRET);
                 req.session.token = token;
-                console.log(token);
                 if (user.isFirstLogin)
                     return res.redirect('http://localhost:3000/createNewStudent.html');
-                // if(user.isFirstLogin)return res.render("pages/index");
+                console.log(user);
+                const result = yield (0, axios_1.default)(`http://localhost:3000/students/getStudent/${user.id}`);
+                res.render("pages/index", { studentLogged: result.data.student });
             }
             else {
                 res.render("pages/login", { errorMessage: "El usuario y la contraseña no coinciden" });

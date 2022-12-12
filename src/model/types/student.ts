@@ -5,11 +5,12 @@ export interface Student {
     personalEmailAddress: string,
     activaEmailAddress: string,
     phoneNumber: string,
-    /*avatar:Blob,
-    cv: Blob,*/
+    avatar:Blob,
+    cv: Blob,
     zipCode: string,
     prom: number,
     activaPointsBalance: number,
-    description:string
+    description:string,
+    id_user: number
 
 }

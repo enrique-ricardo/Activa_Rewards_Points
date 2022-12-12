@@ -14,18 +14,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getStudentProfile = void 0;
 const axios_1 = __importDefault(require("axios"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function getStudentProfile(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (req.session.email) {
-            const targetStudentId = 3; //TO-DO: cambiar todo eso para funcionar con el email
-            const targetStudent = yield (0, axios_1.default)(`http://localhost:3000/students/${targetStudentId}`);
-            //TODO const targetStudent: Student = axiosResponse.data;
-            res.render("pages/studentProfileUpdater", {
-                student: targetStudent.data
-            });
-        }
-        else {
-            res.status(401).send("no tienes permisos de acceso");
+        if (req.session.token != undefined) {
+            const tokenVerified = yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
+            const myTokenVerified = tokenVerified;
+            const targetUserId = `${myTokenVerified.id}`;
+            const targetStudent = yield (0, axios_1.default)(`http://localhost:3000/students/getStudent/${targetUserId}`);
+            res.render("pages/studentProfileUpdater", { student: targetStudent.data.student });
         }
     });
 }

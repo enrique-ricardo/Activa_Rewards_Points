@@ -1,10 +1,12 @@
 import {db} from "../../config.js";
 import { User } from "../../model/types/User.js";
+import { Student } from "../../model/types/student.js";
 import express from 'express';
 import axios from "axios";
 import bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { findStudentLogged } from "../../model/services/studentServices.js";
 
 async function userValidation(req: express.Request, res: express.Response){
 
@@ -14,14 +16,14 @@ async function userValidation(req: express.Request, res: express.Response){
             if (await bcrypt.compare(req.body.password, user.password)){
                 const token = jsonwebtoken.sign({"email": user.email, "role": user.role, "id": user.id}, process.env.SESSION_SECRET!)
                 req.session.token = token;
-                console.log(token);
 
                 if(user.isFirstLogin) return res.redirect('http://localhost:3000/createNewStudent.html');
+                console.log(user);
+                
+                const result = await axios(`http://localhost:3000/students/getStudent/${user.id}`);
+               
+                res.render("pages/index", { studentLogged: result.data.student });
             
-
-                   // if(user.isFirstLogin)return res.render("pages/index");
-
-
             } else {
                 res.render("pages/login", {errorMessage: "El usuario y la contraseña no coinciden"});
             }

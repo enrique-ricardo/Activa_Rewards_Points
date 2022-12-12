@@ -4,4 +4,5 @@ export interface jwtToken {
     iat: number,
     id:number,
     isFirstLogin:boolean
+
 }
