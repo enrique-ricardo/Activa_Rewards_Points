@@ -61,6 +61,9 @@ const getListSendedRewards = (id_user_sender: number, callback: Function) => {
     callback(null, rewardsFund);
   })
 }
+
+
+
 //works
 const getRankingList = (callback: Function) => {
   const queryString = `select student.name, sum(reward.xp_points) points 

@@ -16,10 +16,9 @@ exports.userValidation = void 0;
 const axios_1 = __importDefault(require("axios"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const userIsAdmin_js_1 = require("../../utils/userIsAdmin.js");
 function userValidation(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("estamos en userValidation");
+        // console.log("estamos en userValidation")
         const result = yield axios_1.default.get(`http://localhost:3000/users/${req.body.email}`);
         if (result.data) {
             const user = result.data;
@@ -28,17 +27,21 @@ function userValidation(req, res, next) {
                 req.session.token = token;
                 if (user.isFirstLogin)
                     return res.redirect('http://localhost:3000/createNewStudent.html');
+<<<<<<< HEAD
                 if (yield userIsAdmin_js_1.userIsAdmin)
                     return res.redirect('http://localhost:3000/indexAdmin.html');
                 //console.log(user);
                 //  const result = await axios(`http://localhost:3000/students/getStudent/${user.id}`);
                 // console.log("renderiza index pasando solo studentLogged",result.data.student)
                 // res.render("pages/index", { studentLogged: result.data.student });
+=======
+>>>>>>> d6e709435d210796f81a3a1dcaaa25578cbe7714
                 next();
             }
             else {
                 res.render("pages/login", { errorMessage: "El usuario y la contraseña no coinciden" });
             }
+            ;
         }
         else {
             res.render("pages/login", { errorMessage: "404. No existe ese usuario" });

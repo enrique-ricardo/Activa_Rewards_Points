@@ -16,7 +16,10 @@ function insertOneReward(reward, callback) {
     });
 }
 exports.insertOneReward = insertOneReward;
+<<<<<<< HEAD
 //works
+=======
+>>>>>>> d6e709435d210796f81a3a1dcaaa25578cbe7714
 const getStudentReceivedRewards = (id_user_reward, callback) => {
     const queryString = `SELECT sum(xp_points) FROM reward WHERE id_user_rewarded = ?`;
     config_js_1.db.query(queryString, [id_user_reward], (err, result) => {
@@ -42,6 +45,7 @@ const getStudentSendedRewards = (id_user_sender, callback) => {
     });
 };
 exports.getStudentSendedRewards = getStudentSendedRewards;
+<<<<<<< HEAD
 //works
 const getListReceivedRewards = (id_user_reward, callback) => {
     const queryString = `select student.name, reward.description, reward.xp_points, reward.date, reward.id_user_sender 
@@ -50,6 +54,28 @@ const getListReceivedRewards = (id_user_reward, callback) => {
                       group by reward.id 
                       order by reward.date desc 
                       limit 0,5`;
+=======
+/*const getListReceivedRewards = (id_user_reward: number, callback: Function) => {
+  const queryString = `SELECT (id_user_sender, id_user_reward, xp_points, date, description) FROM reward WHERE id_user_reward = ?`
+  db.query(queryString, [id_user_reward], (err, result)=>{
+    if(err){ callback(err, null)};
+    const rewardsFund: Reward = (<RowDataPacket>result)[0];
+    callback(null, rewardsFund);
+  })
+}
+
+const getListSendedRewards = (id_user_sender: number, callback: Function) => {
+  const queryString = `SELECT (id_user_sender, id_user_reward, xp_points, date, description) FROM reward WHERE id_user_reward = ?`
+  db.query(queryString, [id_user_sender], (err, result)=>{
+    if(err){ callback(err, null)};
+    const rewardsFund: Reward = (<RowDataPacket>result)[0];
+    callback(null, rewardsFund);
+  })
+}*/
+const getListReceivedRewards = (id_user_reward, callback) => {
+    const queryString = `select student.name, reward.description, reward.xp_points, reward.date, reward.id_user_sender 
+                      from reward inner join student on reward.id_user_rewarded = ? group by reward.id order by reward.date desc limit 0,5`;
+>>>>>>> d6e709435d210796f81a3a1dcaaa25578cbe7714
     config_js_1.db.query(queryString, [id_user_reward], (err, result) => {
         if (err) {
             callback(err, null);

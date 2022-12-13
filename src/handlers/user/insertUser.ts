@@ -7,6 +7,12 @@ function insertUser(req: express.Request, res: express.Response){
     insertOneUser(newUser, (err: Error, userId: number)=>{
       if(err){
        return res.status(500).json({"message": err.message});
+        res.status(500).json({"message": err.message});
+      } else {
+        
+       //res.status(200).json({"userId": userId});
+       res.redirect('http://localhost:3000/indexAdmin.html');
+       
       }
        return res.redirect('http://localhost:3000/indexAdmin.html')
       

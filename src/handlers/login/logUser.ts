@@ -10,7 +10,7 @@ import express, { NextFunction } from 'express';
 import { userIsAdmin } from "../../utils/userIsAdmin.js";
 
 async function userValidation(req: express.Request, res: express.Response, next:NextFunction) {
-        console.log("estamos en userValidation")
+       // console.log("estamos en userValidation")
         const result = await axios.get(`http://localhost:3000/users/${req.body.email}`);
         if (result.data){
             const user: User = result.data;
@@ -23,22 +23,20 @@ async function userValidation(req: express.Request, res: express.Response, next:
                 
                 if(await userIsAdmin) return res.redirect('http://localhost:3000/indexAdmin.html');
 
-                //console.log(user);
-                
-              //  const result = await axios(`http://localhost:3000/students/getStudent/${user.id}`);
-              // console.log("renderiza index pasando solo studentLogged",result.data.student)
-               // res.render("pages/index", { studentLogged: result.data.student });
+                if(user.isFirstLogin) return res.redirect('http://localhost:3000/createNewStudent.html');
+
                
                 next();
 
             } else {
-                res.render("pages/login", {errorMessage: "El usuario y la contraseña no coinciden"});
-            }
-        } else {
-            res.render("pages/login", {errorMessage: "404. No existe ese usuario"});
+                res.render("pages/login", {errorMessage: "El usuario y la contraseña no coinciden"})};
+            }else {
+                res.render("pages/login", {errorMessage: "404. No existe ese usuario"});
         }
+    
     }
-           
+ 
+         
 
 
 

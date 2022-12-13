@@ -23,7 +23,8 @@ function userIsStudent(req, res, next) {
                 next();
             }
             else {
-                res.status(401).json({ "message": "Not Student" });
+                //res.status(401).json({"message":"Not Student"});
+                res.redirect('http://localhost:3000/indexAdmin.html');
             }
         }
     });

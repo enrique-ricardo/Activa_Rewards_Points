@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/styleNewCreateUser.css">
+    <title>Eliminar estudiantes</title>
+</head>
+
+<body>
+    
+    <div class="contenedor_general">
+        <div id="prueba">
+            <img id="logoXarxatec_created_user" src="img/logo-x-activa-movil-w412.png" alt="Titulo">
+            <img id="imagenLogoXarxatec_created_user" src="img/login-img.svg" alt="LogoEnMovimiento">
+        </div>
+
+        <p>Eliminar estudiante</p>
+        
+            <form action="/students"method="get">
+
+                <p>
+                    <label for="id_student">Eliminar a...</label>
+                        <select value="student"></option>
+                    </select>
+                </p>
+    
+            
+                <p><input type="submit" value="Confirmar"></p>
+                <input type="hidden" name="_method" value="delete">
+            
+        </form>
+    </div>
+</body>
+
+</html>
