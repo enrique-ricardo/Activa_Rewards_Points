@@ -9,17 +9,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getStudents = void 0;
-const studentServices_js_1 = require("../../model/services/studentServices.js");
-function getStudents(req, res) {
+exports.postOneReward = void 0;
+const rewardServices_js_1 = require("../../model/services/rewardServices.js");
+function postOneReward(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const id_user = req.params.id_user;
-        (0, studentServices_js_1.findAllStudents)(id_user, (err, students) => {
+        console.log("en postOneReward");
+        console.log("valores en req.body", req.body);
+        const newReward = { id_user_sender: Number(req.params.id_user),
+            id_user_rewarded: Number(req.body.id_user_rewarded),
+            xp_points: Number(req.body.xp_points),
+            description: req.body.description };
+        (0, rewardServices_js_1.insertOneReward)(newReward, (err, rewardId) => {
             if (err) {
-                return res.status(404).json({ "message": err.message });
+                res.status(500).json({ "message": err.message });
             }
-            res.status(200).json(students);
+            else {
+                res.status(200).json({ "rewardId": rewardId });
+            }
         });
     });
 }
-exports.getStudents = getStudents;
+exports.postOneReward = postOneReward;

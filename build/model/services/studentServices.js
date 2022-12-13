@@ -29,9 +29,9 @@ const getActivaPointsReward = (id, callback) => {
     });
 };
 exports.getActivaPointsReward = getActivaPointsReward;
-function findAllStudents(callback) {
-    const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code FROM student";
-    config_js_1.db.query(queryString, (err, result) => {
+function findAllStudents(id, callback) {
+    const queryString = "SELECT id, name, first_surname, second_surname, email_personal, email_activa, phone_number, zip_code, id_user FROM student WHERE id_user <> ?";
+    config_js_1.db.query(queryString, [id], (err, result) => {
         if (err)
             callback(err, null);
         const students = result;

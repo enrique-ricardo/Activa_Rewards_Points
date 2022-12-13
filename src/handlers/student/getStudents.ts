@@ -4,12 +4,12 @@ import express from 'express';
 
 
 async function getStudents(req: express.Request, res: express.Response){
-    findAllStudents((err:Error, students:Student[])=>{
+    const id_user = req.params.id_user;
+    findAllStudents(id_user, (err:Error, students:Student[])=>{
         if(err){
             return res.status(404).json({"message": err.message});
         }
-        console.log("Students inside getStudents.ts" + students);
-        return res.status(200).json(students);
+        res.status(200).json(students);
     })
 }
 

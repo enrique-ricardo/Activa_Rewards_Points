@@ -1,19 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getListReceivedRewards = exports.getStudentSendedRewards = exports.getListSendedRewards = exports.getStudentReceivedRewards = exports.createNewReward = void 0;
+exports.getListReceivedRewards = exports.getStudentSendedRewards = exports.getListSendedRewards = exports.getStudentReceivedRewards = exports.insertOneReward = void 0;
 const config_js_1 = require("../../config.js");
-const createNewReward = (reward, id_user_sender, id_user_reward, xp_points, description, callback) => {
-    const queryString = `INSERT INTO reward (id_user_sender, id_user_reward, xp_points, NOW(), description) VALUES (?, ?, ?, ?, ?)`;
+function insertOneReward(reward, callback) {
+    const queryString = "INSERT INTO reward(id_user_sender, id_user_rewarded, xp_points, date, description) VALUES (?,?,?, NOW(), ?)";
     config_js_1.db.query(queryString, [reward.id_user_sender, reward.id_user_rewarded, reward.xp_points, reward.description], (err, result) => {
+        console.log("err:", err);
         if (err) {
             callback(err, null);
         }
-        ;
+        console.log("result", result);
+        console.log("<OkPacket> result", result);
         const insertId = result.insertId;
         callback(null, insertId);
     });
-};
-exports.createNewReward = createNewReward;
+}
+exports.insertOneReward = insertOneReward;
+//TODO no pasa el id bien!!!
 const getStudentReceivedRewards = (id_user_reward, callback) => {
     const queryString = `SELECT sum(xp_points) FROM reward WHERE id_user_reward = ?`;
     config_js_1.db.query(queryString, [id_user_reward], (err, result) => {

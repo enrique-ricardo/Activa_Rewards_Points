@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction } from "express";
 import {createStudent} from "../../model/services/studentServices.js";
 import {Student} from "../../model/types/student.js";
 import { jwtToken } from "../../model/types/jwtToken.js";

@@ -12,20 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userIsAdmin = void 0;
+exports.showRewards = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-function userIsAdmin(req, res, next) {
+const axios_1 = __importDefault(require("axios"));
+function showRewards(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log("entra en showRewards");
         if (req.session.token != undefined) {
             const tokenVerified = yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
             const myTokenVerified = tokenVerified;
-            if (myTokenVerified.role == "admin") {
-                next();
-            }
-            else {
-                res.status(401).json({ "message": "Not Authorized" });
-            }
+            const resultAxiosStudent = yield (0, axios_1.default)(`http://localhost:3000/students/getStudent/${myTokenVerified.id}`);
+            const userLoggedStudentData = resultAxiosStudent.data.student;
+            const resultAxiosStudents = yield (0, axios_1.default)(`http://localhost:3000/students/getStudents/${myTokenVerified.id}`);
+            const studentData = resultAxiosStudents.data;
+            res.status(200).render("pages/index", { studentLogged: userLoggedStudentData, studentsData: studentData });
+        }
+        else {
+            res.status(401).send("No te has autenticado");
         }
     });
 }
-exports.userIsAdmin = userIsAdmin;
+exports.showRewards = showRewards;

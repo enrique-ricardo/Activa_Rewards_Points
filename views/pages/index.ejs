@@ -12,24 +12,24 @@
  
   <div id="menu">
     <div class="menuFoot">
-      <a href="#"><img src="img/iconosMenu/mis-puntos-red.svg" alt="points"></a>
-      <p class="red">Mis puntos</p>
+      <a class="text_icon" href="#"><img class="change_color_icon" src="img/iconosMenu/mis-puntos-gray.svg" alt="create"><br>Mis Puntos</a>
+      <p class="text_hidden">MIS Puntos</p>
     </div>
     <div class="menuFoot">
-      <a href="ranking.html"><img src="img/iconosMenu/ranking-gray.svg" alt="ranking"></a>
-      <p>Ranking</p>
+      <a class="text_icon" href="http://localhost:3000/ranking.html"><img class="change_color_icon" src="img/iconosMenu/ranking-gray.svg" alt="create"><br>Ranking</a>
+      <p class="text_hidden">Ranking</p>
     </div>
     <div class="menuFoot">
-      <a href="/getStudentProfile"><img src="img/iconosMenu/mi-perfil-gray.svg" alt="perfil"></a>
-      <p>Mi perfil</p>
+      <a class="text_icon" href="/getStudentProfile"><img class="change_color_icon" src="img/iconosMenu/mi-perfil-gray.svg" alt="create"><br>Mi Perfil</a>
+      <p class="text_hidden">Mi Perfil</p>
     </div>
     <div class="menuFoot">
-      <a href="login.html"><img src="img/iconosMenu/logout-gray.svg" alt="exit"></a>
-      <p>Salir</p>
+      <a class="text_icon" href="http://localhost:3000/login.html"><img class="change_color_icon" src="img/iconosMenu/logout-gray.svg" alt="exit"><br>Salir</a>
+      <p class="text_hidden">Salir</p>
     </div>
   </div>
   <div>
-    <h1 class="center">PUNTOS DE <%= studentLogged.name %> </h1>
+    <h1 class="center">PUNTOS DE <%=studentLogged.name %> </h1>
     <hr />
     <div id="divPiechart">
       <div class="color">
@@ -52,26 +52,26 @@
     <hr />
     <div id="fondo">
       <p class="center">Alumnos Xarxatec Activa 2023</p>
-      <form action="#" method="post"></form>
+      <p><%= studentLogged.id_user %></p>
+      <form action="http://localhost:3000/rewards/<%= studentLogged.id_user %>" method="post">
       <div class="search">
         <img id="iconActiva" src="img/puntos-activa-logo.svg" alt="logoBuscarGente">
         
-        <select name="alumnos" id="alumnos">
-          <option value="">Enviar puntos a...
-          
-          </option>
+        <select name="id_user_rewarded" id="alumnos">
+            <% studentsData.forEach( student=>{ %>
+              <option value="<%= student.id_user %>">Enviar puntos a...<%= student.name %> <%= student.first_surname %></option>
+            <% }); %>  
         </select>
       </div>
       <div class="spanCenter">Descripción del envío</div>
         <div id="textContainerDescription">
-          <input id="sendDescription" type="text"></div>
+          <label for="description"></label> 
+          <input name="description" id="sendDescription" type="text"></div>
         <div class="spanCenter">¿cuánto envías?</div>
         <div id="numberContainerqty">
-          <input id="pointQty" name="pointQty" type="number">
-          <input type="hidden" name="senderId" value="<%= studentLogged.id %>">
-        <input type="hidden" name="userSender" value="<%= studentLogged.name %>">
-        <input type="hidden" name="date" value="">
-          <button id="sendPoints">ENVIAR</button>
+          <label for="xp_points"></label> 
+          <input name="xp_points" id="pointQty" type="text" />
+          <input id="sendPoints" type="submit" value="ENVIAR" />
         </div>
       </form>
     </div>
