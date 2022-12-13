@@ -37,7 +37,7 @@ router.get("/getStudentProfile", getStudentProfile);
 
 //router.delete("/students", deleteStudent);
 
-router.delete("/students/:id_student", validateToken, userIsAdmin,  deleteStudent);//borrar usuarios
+//router.delete("/students/:id_student", validateToken, deleteStudent);//borrar usuarios
 
 //router.put("/students/:id_student", updateOneStudent);
 
@@ -45,14 +45,14 @@ router.delete("/students/:id_student", validateToken, userIsAdmin,  deleteStuden
 
 //router.post("/index", userValidation,);
 
-router.post("/index", userValidation, validateToken, userIsStudent, showRewards);
+router.post("/index", userValidation, validateToken, showRewards);
 
 
 
 
 router.get("/users/:user_email", getOneUser);
 
-router.post("/users", validateToken, userIsAdmin, insertUser);//crear usuarios
+router.post("/users", validateToken, insertUser);//crear usuarios
 
 
 

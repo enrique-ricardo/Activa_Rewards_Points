@@ -30,7 +30,8 @@ body {
   margin-bottom: -2vw;
 }
 
-#btn_create_user {
+#btn_create_user,
+#btn_delete_student {
   background-color: rgb(224, 0, 77);
   border-style: none;
   border-radius: 9vw;

@@ -18,19 +18,15 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function userValidation(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("estamos en userValidation");
+        // console.log("estamos en userValidation")
         const result = yield axios_1.default.get(`http://localhost:3000/users/${req.body.email}`);
         if (result.data) {
             const user = result.data;
             if (yield bcrypt_1.default.compare(req.body.password, user.password)) {
                 const token = jsonwebtoken_1.default.sign({ "email": user.email, "role": user.role, "id": user.id }, process.env.SESSION_SECRET);
                 req.session.token = token;
-                //if(await userIsAdmin) return res.redirect('http://localhost:3000/indexAdmin.html')};
                 if (user.isFirstLogin)
                     return res.redirect('http://localhost:3000/createNewStudent.html');
-                //return res.redirect('http://localhost:3000/indexAdmin.html');
-                //  const result = await axios(`http://localhost:3000/students/getStudent/${user.id}`);
-                // res.render("pages/index", { studentLogged: result.data.student });
                 next();
             }
             else {
