@@ -40,7 +40,11 @@ const getStudentSendedRewards = (id_user_sender: number, callback: Function) => 
 //works
 const getListReceivedRewards = (id_user_reward: number, callback: Function) => {
   const queryString = `select student.name, reward.description, reward.xp_points, reward.date, reward.id_user_sender 
-                      from reward inner join student on reward.id_user_rewarded = ? group by reward.id order by reward.date desc limit 0,5`
+                      from reward 
+                      join student on reward.id_user_rewarded = ? 
+                      group by reward.id 
+                      order by reward.date desc 
+                      limit 0,5`
   db.query(queryString, [id_user_reward], (err, result)=>{
     if(err){ callback(err, null)};
     const rewardsFund: Reward = (<RowDataPacket>result)[0];
