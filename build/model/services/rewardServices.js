@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getListReceivedRewards = exports.getStudentSendedRewards = exports.getListSendedRewards = exports.getStudentReceivedRewards = exports.insertOneReward = void 0;
+exports.getRankingList = exports.getListReceivedRewards = exports.getStudentSendedRewards = exports.getListSendedRewards = exports.getStudentReceivedRewards = exports.insertOneReward = void 0;
 const config_js_1 = require("../../config.js");
 function insertOneReward(reward, callback) {
     const queryString = "INSERT INTO reward(id_user_sender, id_user_rewarded, xp_points, date, description) VALUES (?,?,?, NOW(), ?)";
@@ -16,8 +16,9 @@ function insertOneReward(reward, callback) {
     });
 }
 exports.insertOneReward = insertOneReward;
+//works
 const getStudentReceivedRewards = (id_user_reward, callback) => {
-    const queryString = `SELECT sum(xp_points) FROM reward WHERE id_user_reward = ?`;
+    const queryString = `SELECT sum(xp_points) FROM reward WHERE id_user_rewarded = ?`;
     config_js_1.db.query(queryString, [id_user_reward], (err, result) => {
         if (err) {
             callback(err, null);
@@ -28,6 +29,7 @@ const getStudentReceivedRewards = (id_user_reward, callback) => {
     });
 };
 exports.getStudentReceivedRewards = getStudentReceivedRewards;
+//works
 const getStudentSendedRewards = (id_user_sender, callback) => {
     const queryString = `SELECT sum(xp_points) FROM reward WHERE id_user_sender = ?`;
     config_js_1.db.query(queryString, [id_user_sender], (err, result) => {
@@ -40,10 +42,14 @@ const getStudentSendedRewards = (id_user_sender, callback) => {
     });
 };
 exports.getStudentSendedRewards = getStudentSendedRewards;
+//works
 const getListReceivedRewards = (id_user_reward, callback) => {
-    const queryString = `SELECT (student.name, reward.id_user_sender, reward.id_user_reward, reward.xp_points, reward.date, reward.description) 
-                      FROM reward INNER JOIN student ON reward.id_user_sender = student.id_user 
-                      WHERE id_user_reward = ?`;
+    const queryString = `select student.name, reward.description, reward.xp_points, reward.date, reward.id_user_sender 
+                      from reward 
+                      join student on reward.id_user_rewarded = ? 
+                      group by reward.id 
+                      order by reward.date desc 
+                      limit 0,5`;
     config_js_1.db.query(queryString, [id_user_reward], (err, result) => {
         if (err) {
             callback(err, null);
@@ -54,10 +60,10 @@ const getListReceivedRewards = (id_user_reward, callback) => {
     });
 };
 exports.getListReceivedRewards = getListReceivedRewards;
+//works
 const getListSendedRewards = (id_user_sender, callback) => {
-    const queryString = `SELECT (student.name, reward.id_user_sender, reward.id_user_reward, reward.xp_points, reward.date, reward.description) 
-                      FROM reward INNER JOIN student ON reward.id_user_rewarded = student.id_user 
-                      ORDER BY reward.date DESC LIMIT 0,5`;
+    const queryString = `select student.name, reward.description, reward.xp_points, reward.date, reward.id_user_rewarded 
+                      from reward inner join student on reward.id_user_sender = ? group by reward.id order by reward.date desc limit 0,5`;
     config_js_1.db.query(queryString, [id_user_sender], (err, result) => {
         if (err) {
             callback(err, null);
@@ -68,3 +74,18 @@ const getListSendedRewards = (id_user_sender, callback) => {
     });
 };
 exports.getListSendedRewards = getListSendedRewards;
+//works
+const getRankingList = (callback) => {
+    const queryString = `select student.name, sum(reward.xp_points) points 
+                      from reward inner join student on reward.id_user_rewarded = student.id_user 
+                      group by student.id_user order by points desc limit 0,5`;
+    config_js_1.db.query(queryString, (err, result) => {
+        if (err) {
+            callback(err, null);
+        }
+        ;
+        const rankingList = result[0];
+        callback(null, rankingList);
+    });
+};
+exports.getRankingList = getRankingList;

@@ -19,6 +19,8 @@ import { getActivaReward } from '../handlers/rewards/getActivaPointsReward.js';
 import { getStudent } from '../handlers/student/getStudent.js';
 import { userIsStudent } from '../utils/userIsStudent.js';
 import { showRewards } from '../handlers/rewards/showRewards.js';
+import { getTopFiveRanking } from '../handlers/rewards/getTopFiveRanking'
+
 const router = express.Router();
 
 router.post("/students",insertStudent, validateToken, showRewards);
@@ -58,6 +60,6 @@ router.post("/users", validateToken, userIsAdmin, insertUser);//crear usuarios
 
 router.post("/rewards/:id_user", validateToken, userIsStudent, postOneReward);
 
-
+router.get("/ranking", getTopFiveRanking)
 
 export {router};

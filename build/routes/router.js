@@ -18,6 +18,7 @@ const postOneReward_js_1 = require("../handlers/rewards/postOneReward.js");
 const getStudent_js_1 = require("../handlers/student/getStudent.js");
 const userIsStudent_js_1 = require("../utils/userIsStudent.js");
 const showRewards_js_1 = require("../handlers/rewards/showRewards.js");
+const getTopFiveRanking_1 = require("../handlers/rewards/getTopFiveRanking");
 const router = express_1.default.Router();
 exports.router = router;
 router.post("/students", insertStudent_js_1.insertStudent, validateToken_js_1.validateToken, showRewards_js_1.showRewards);
@@ -35,3 +36,4 @@ router.post("/index", logUser_js_1.userValidation, validateToken_js_1.validateTo
 router.get("/users/:user_email", getOneUser_js_1.getOneUser);
 router.post("/users", validateToken_js_1.validateToken, userIsAdmin_js_1.userIsAdmin, insertUser_js_1.insertUser); //crear usuarios
 router.post("/rewards/:id_user", validateToken_js_1.validateToken, userIsStudent_js_1.userIsStudent, postOneReward_js_1.postOneReward);
+router.get("/ranking", getTopFiveRanking_1.getTopFiveRanking);
