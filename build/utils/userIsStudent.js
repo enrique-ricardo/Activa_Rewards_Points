@@ -8,18 +8,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getStudents = void 0;
-const studentServices_js_1 = require("../../model/services/studentServices.js");
-function getStudents(req, res) {
+exports.userIsStudent = void 0;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+function userIsStudent(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const id_user = req.params.id_user;
-        (0, studentServices_js_1.findAllStudents)(id_user, (err, students) => {
-            if (err) {
-                return res.status(404).json({ "message": err.message });
+        if (req.session.token != undefined) {
+            const tokenVerified = yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
+            const myTokenVerified = tokenVerified;
+            if (myTokenVerified.role == "student") {
+                next();
             }
-            res.status(200).json(students);
-        });
+            else {
+                res.status(401).json({ "message": "Not Student" });
+            }
+        }
     });
 }
-exports.getStudents = getStudents;
+exports.userIsStudent = userIsStudent;

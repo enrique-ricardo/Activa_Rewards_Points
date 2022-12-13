@@ -47,6 +47,30 @@ p {
     justify-content: space-evenly;
     border-radius: 7vw 7vw 0vw 0vw;
   }
+
+
+.change_color_icon:hover,
+.change_color_icon:focus {
+  filter: brightness(0) saturate(100%) invert(11%) sepia(88%) saturate(7322%) hue-rotate(333deg) brightness(85%) contrast(107%);
+
+}
+
+.text_icon{
+  text-decoration: none;
+  font-size: 0.9vw;
+  color: #808080;
+  
+}
+
+.text_hidden{
+  color: transparent;
+}
+
+.text_icon:hover,
+.text_icon:focus {
+  filter: brightness(0) saturate(100%) invert(11%) sepia(88%) saturate(7322%) hue-rotate(333deg) brightness(85%) contrast(107%);
+
+}
   
   #menu a img {
     width: 10vw;

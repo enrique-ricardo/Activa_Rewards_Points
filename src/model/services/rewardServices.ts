@@ -4,19 +4,21 @@ import {OkPacket, RowDataPacket} from "mysql2";
 import mysqlPromise from "mysql2/promise";
 
 
-const createNewReward = (reward: Reward, id_user_sender: number, id_user_reward: number, xp_points: number, description: string, callback: Function) => {
-  const queryString = `INSERT INTO reward (id_user_sender, id_user_reward, xp_points, NOW(), description) VALUES (?, ?, ?, ?, ?)`;
-
-  db.query(
-    queryString,
-    [reward.id_user_sender, reward.id_user_rewarded, reward.xp_points, reward.description],
-    (err, result) => {
-      if (err) {callback(err, null)};
+function insertOneReward(reward: Reward, callback:Function){
+  const queryString = "INSERT INTO reward(id_user_sender, id_user_rewarded, xp_points, date, description) VALUES (?,?,?, NOW(), ?)";
+  db.query(queryString, [reward.id_user_sender, reward.id_user_rewarded, reward.xp_points, reward.description], (err, result)=>{
+    console.log("err:",err)
+      if (err) {
+        callback(err, null);
+      }
+      console.log("result",result)
+      console.log("<OkPacket> result",<OkPacket> result)
       const insertId = (<OkPacket> result).insertId;
       callback(null, insertId);
-    }
-  );
-};
+    })
+}
+//TODO no pasa el id bien!!!
+
 
 const getStudentReceivedRewards = (id_user_reward: number, callback: Function) => {
   const queryString = `SELECT sum(xp_points) FROM reward WHERE id_user_reward = ?`
@@ -56,4 +58,4 @@ const getListSendedRewards = (id_user_sender: number, callback: Function) => {
 
 
 
-export {createNewReward, getStudentReceivedRewards, getListSendedRewards, getStudentSendedRewards, getListReceivedRewards}
+export {insertOneReward, getStudentReceivedRewards, getListSendedRewards, getStudentSendedRewards, getListReceivedRewards}

@@ -29,4 +29,3 @@ function userIsAdmin(req, res, next) {
     });
 }
 exports.userIsAdmin = userIsAdmin;
-//TODO: MAKE A FUNCTION THAT COMPARE IF ITS THE FIRST TIME THAT USER IS LOGIN IN AND REDIRECTS TO THE PAGE createNewStudent.html
