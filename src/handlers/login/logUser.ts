@@ -18,27 +18,27 @@ async function userValidation(req: express.Request, res: express.Response, next:
                 const token = jsonwebtoken.sign({"email": user.email, "role": user.role, "id": user.id}, process.env.SESSION_SECRET!)
                 req.session.token = token;
                
-                if(user.isFirstLogin) return res.redirect('http://localhost:3000/createNewStudent.html');{
+                //if(await userIsAdmin) return res.redirect('http://localhost:3000/indexAdmin.html')};
 
-                
-                if(await userIsAdmin) return res.redirect('http://localhost:3000/indexAdmin.html')};
+                if(user.isFirstLogin) return res.redirect('http://localhost:3000/createNewStudent.html');
 
-                //console.log(user);
+                //return res.redirect('http://localhost:3000/indexAdmin.html');
                 
               //  const result = await axios(`http://localhost:3000/students/getStudent/${user.id}`);
-              // console.log("renderiza index pasando solo studentLogged",result.data.student)
+              
                // res.render("pages/index", { studentLogged: result.data.student });
                
                 next();
 
             } else {
-                res.render("pages/login", {errorMessage: "El usuario y la contraseña no coinciden"});
-            }
-        } else {
-            res.render("pages/login", {errorMessage: "404. No existe ese usuario"});
+                res.render("pages/login", {errorMessage: "El usuario y la contraseña no coinciden"})};
+            }else {
+                res.render("pages/login", {errorMessage: "404. No existe ese usuario"});
         }
+    
     }
-           
+ 
+         
 
 
 

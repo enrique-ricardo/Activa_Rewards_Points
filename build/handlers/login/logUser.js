@@ -16,7 +16,6 @@ exports.userValidation = void 0;
 const axios_1 = __importDefault(require("axios"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const userIsAdmin_js_1 = require("../../utils/userIsAdmin.js");
 function userValidation(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log("estamos en userValidation");
@@ -26,22 +25,18 @@ function userValidation(req, res, next) {
             if (yield bcrypt_1.default.compare(req.body.password, user.password)) {
                 const token = jsonwebtoken_1.default.sign({ "email": user.email, "role": user.role, "id": user.id }, process.env.SESSION_SECRET);
                 req.session.token = token;
+                //if(await userIsAdmin) return res.redirect('http://localhost:3000/indexAdmin.html')};
                 if (user.isFirstLogin)
                     return res.redirect('http://localhost:3000/createNewStudent.html');
-                {
-                    if (yield userIsAdmin_js_1.userIsAdmin)
-                        return res.redirect('http://localhost:3000/indexAdmin.html');
-                }
-                ;
-                //console.log(user);
+                //return res.redirect('http://localhost:3000/indexAdmin.html');
                 //  const result = await axios(`http://localhost:3000/students/getStudent/${user.id}`);
-                // console.log("renderiza index pasando solo studentLogged",result.data.student)
                 // res.render("pages/index", { studentLogged: result.data.student });
                 next();
             }
             else {
                 res.render("pages/login", { errorMessage: "El usuario y la contraseña no coinciden" });
             }
+            ;
         }
         else {
             res.render("pages/login", { errorMessage: "404. No existe ese usuario" });

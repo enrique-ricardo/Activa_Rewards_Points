@@ -45,7 +45,7 @@ router.delete("/students/:id_student", validateToken, userIsAdmin,  deleteStuden
 
 //router.post("/index", userValidation,);
 
-router.post("/index", userValidation, validateToken, showRewards);
+router.post("/index", userValidation, validateToken, userIsStudent, showRewards);
 
 
 

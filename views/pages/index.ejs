@@ -52,7 +52,6 @@
     <hr />
     <div id="fondo">
       <p class="center">Alumnos Xarxatec Activa 2023</p>
-      <p><%= studentLogged.id_user %></p>
       <form action="http://localhost:3000/rewards/<%= studentLogged.id_user %>" method="post">
       <div class="search">
         <img id="iconActiva" src="img/puntos-activa-logo.svg" alt="logoBuscarGente">
@@ -70,8 +69,8 @@
         <div class="spanCenter">¿cuánto envías?</div>
         <div id="numberContainerqty">
           <label for="xp_points"></label> 
-          <input name="xp_points" id="pointQty" type="text" />
-          <input id="sendPoints" type="submit" value="ENVIAR" />
+          <input name="xp_points" id="pointQty" type="number" min="1" max="100">
+          <input id="sendPoints" type="submit" value="ENVIAR">
         </div>
       </form>
     </div>

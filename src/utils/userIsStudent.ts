@@ -10,7 +10,8 @@ async function userIsStudent( req: express.Request, res: express.Response, next:
         if( myTokenVerified.role == "student"){
                 next();
          } else {
-            res.status(401).json({"message":"Not Student"});
+            //res.status(401).json({"message":"Not Student"});
+            res.redirect('http://localhost:3000/indexAdmin.html');
         }
     }
 }

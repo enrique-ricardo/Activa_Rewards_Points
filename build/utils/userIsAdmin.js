@@ -19,12 +19,11 @@ function userIsAdmin(req, res, next) {
         if (req.session.token != undefined) {
             const tokenVerified = yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
             const myTokenVerified = tokenVerified;
-            if (myTokenVerified.role == "admin") {
+            if (myTokenVerified.role == "admin")
                 next();
-            }
-            else {
-                res.status(401).json({ "message": "Not Authorized" });
-            }
+        }
+        else {
+            res.status(401).json({ "message": "Not Authorized" });
         }
     });
 }
