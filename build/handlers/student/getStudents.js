@@ -13,11 +13,11 @@ exports.getStudents = void 0;
 const studentServices_js_1 = require("../../model/services/studentServices.js");
 function getStudents(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        (0, studentServices_js_1.findAllStudents)((err, students) => {
+        const id_user = req.params.id_user;
+        (0, studentServices_js_1.findAllStudents)(id_user, (err, students) => {
             if (err) {
                 return res.status(404).json({ "message": err.message });
             }
-            console.log(typeof (students[0]));
             res.status(200).json(students);
         });
     });

@@ -1,5 +1,8 @@
 export interface jwtToken {
     email: string,
     role: string,
-    iat: number
+    iat: number,
+    id:number,
+    isFirstLogin:boolean
+
 }

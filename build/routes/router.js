@@ -7,27 +7,30 @@ exports.router = void 0;
 const express_1 = __importDefault(require("express"));
 const insertStudent_js_1 = require("../handlers/student/insertStudent.js");
 const getStudents_js_1 = require("../handlers/student/getStudents.js");
-const getOneStudent_js_1 = require("../handlers/student/getOneStudent.js");
-const deleteOneStudent_js_1 = require("../handlers/student/deleteOneStudent.js");
 const getStudentProfile_js_1 = require("../handlers/student/getStudentProfile.js");
-const updateOneStudent_js_1 = require("../handlers/student/updateOneStudent.js");
-const patchOneStudent_js_1 = require("../handlers/student/patchOneStudent.js");
 const logUser_js_1 = require("../handlers/login/logUser.js");
 const getOneUser_js_1 = require("../handlers/user/getOneUser.js");
 const insertUser_js_1 = require("../handlers/user/insertUser.js");
 const validateToken_js_1 = require("../utils/validateToken.js");
-const userIsAdmin_js_1 = require("../utils/userIsAdmin.js");
+const postOneReward_js_1 = require("../handlers/rewards/postOneReward.js");
+const getStudent_js_1 = require("../handlers/student/getStudent.js");
+const userIsStudent_js_1 = require("../utils/userIsStudent.js");
+const showRewards_js_1 = require("../handlers/rewards/showRewards.js");
 const router = express_1.default.Router();
 exports.router = router;
-router.get("/editStudentProfile", getStudentProfile_js_1.getStudentProfile);
-router.post("/students", insertStudent_js_1.insertStudent);
-router.get("/students", getStudents_js_1.getStudents);
-router.get("/students/:id_student", getOneStudent_js_1.getOneStudent);
+router.post("/students", insertStudent_js_1.insertStudent, validateToken_js_1.validateToken, showRewards_js_1.showRewards);
+//router.get("/students", getStudents);
+router.post("students/createNewStudent", insertStudent_js_1.insertStudent); //crear estudiante desde el perfil
+router.get("/students/getStudents/:id_user", getStudents_js_1.getStudents); //recupera los estudiantes excepto el loggeado
+router.get("/students/getStudent/:id_user", getStudent_js_1.getStudent); //mi perfil
+router.get("/getStudentProfile", getStudentProfile_js_1.getStudentProfile);
+//router.get("/editStudentProfile/:id_student", getOneStudent);
 //router.delete("/students", deleteStudent);
-router.delete("/students/:id_student", validateToken_js_1.validateToken, userIsAdmin_js_1.userIsAdmin, deleteOneStudent_js_1.deleteStudent);
-router.put("/students/:id_student", updateOneStudent_js_1.updateOneStudent);
-router.patch("/students/:id_student", patchOneStudent_js_1.patchOneStudent);
-router.post("/index", logUser_js_1.userValidation);
-router.post("/createNewStudent", insertStudent_js_1.insertStudent);
+//router.delete("/students/:id_student", validateToken, deleteStudent);//borrar usuarios
+//router.put("/students/:id_student", updateOneStudent);
+//router.post("/index", userValidation,);
+router.post("/index", logUser_js_1.userValidation, validateToken_js_1.validateToken, userIsStudent_js_1.userIsStudent, showRewards_js_1.showRewards);
+router.get("/mypoints", showRewards_js_1.showRewards);
 router.get("/users/:user_email", getOneUser_js_1.getOneUser);
-router.post("/users", insertUser_js_1.insertUser);
+router.post("/users", validateToken_js_1.validateToken, insertUser_js_1.insertUser); //crear usuarios
+router.post("/rewards/:id_user", validateToken_js_1.validateToken, userIsStudent_js_1.userIsStudent, postOneReward_js_1.postOneReward, showRewards_js_1.showRewards);

@@ -16,19 +16,23 @@ exports.userValidation = void 0;
 const axios_1 = __importDefault(require("axios"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-function userValidation(req, res) {
+function userValidation(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
+        // console.log("estamos en userValidation")
         const result = yield axios_1.default.get(`http://localhost:3000/users/${req.body.email}`);
         if (result.data) {
             const user = result.data;
             if (yield bcrypt_1.default.compare(req.body.password, user.password)) {
-                const token = jsonwebtoken_1.default.sign({ "email": user.email, "role": user.role }, process.env.SESSION_SECRET);
+                const token = jsonwebtoken_1.default.sign({ "email": user.email, "role": user.role, "id": user.id }, process.env.SESSION_SECRET);
                 req.session.token = token;
-                //res.status(200).json(token);
                 if (user.isFirstLogin)
                     return res.redirect('http://localhost:3000/createNewStudent.html');
+                next();
             }
-            res.render("pages/login", { errorMessage: "El usuario y la contraseña no coinciden" });
+            else {
+                res.render("pages/login", { errorMessage: "El usuario y la contraseña no coinciden" });
+            }
+            ;
         }
         else {
             res.render("pages/login", { errorMessage: "404. No existe ese usuario" });
