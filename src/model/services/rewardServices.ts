@@ -36,23 +36,7 @@ const getStudentSendedRewards = (id_user_sender: number, callback: Function) => 
   })
 }
 
-/*const getListReceivedRewards = (id_user_reward: number, callback: Function) => {
-  const queryString = `SELECT (id_user_sender, id_user_reward, xp_points, date, description) FROM reward WHERE id_user_reward = ?`
-  db.query(queryString, [id_user_reward], (err, result)=>{
-    if(err){ callback(err, null)};
-    const rewardsFund: Reward = (<RowDataPacket>result)[0];
-    callback(null, rewardsFund);
-  })
-}
 
-const getListSendedRewards = (id_user_sender: number, callback: Function) => {
-  const queryString = `SELECT (id_user_sender, id_user_reward, xp_points, date, description) FROM reward WHERE id_user_reward = ?`
-  db.query(queryString, [id_user_sender], (err, result)=>{
-    if(err){ callback(err, null)};
-    const rewardsFund: Reward = (<RowDataPacket>result)[0];
-    callback(null, rewardsFund);
-  })
-}*/
 const getListReceivedRewards = (id_user_reward: number, callback: Function) => {
   const queryString = `select student.name, reward.description, reward.xp_points, reward.date, reward.id_user_sender 
                       from reward inner join student on reward.id_user_rewarded = ? group by reward.id order by reward.date desc limit 0,5`

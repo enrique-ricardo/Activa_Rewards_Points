@@ -45,9 +45,9 @@ router.get("/getStudentProfile", getStudentProfile);
 
 //router.post("/index", userValidation,);
 
-router.post("/index", userValidation, validateToken, showRewards);
+router.post("/index", userValidation, validateToken, userIsStudent, showRewards);
 
-
+router.get("/mypoints", showRewards);
 
 
 router.get("/users/:user_email", getOneUser);
@@ -56,7 +56,7 @@ router.post("/users", validateToken, insertUser);//crear usuarios
 
 
 
-router.post("/rewards/:id_user", validateToken, userIsStudent, postOneReward);
+router.post("/rewards/:id_user", validateToken, userIsStudent, postOneReward, showRewards);
 
 
 

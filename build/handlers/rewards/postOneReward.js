@@ -11,9 +11,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postOneReward = void 0;
 const rewardServices_js_1 = require("../../model/services/rewardServices.js");
-function postOneReward(req, res) {
+function postOneReward(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        // console.log("en postOneReward")
+        console.log("en postOneReward");
         //console.log("valores en req.body",req.body)
         const newReward = { id_user_sender: Number(req.params.id_user),
             id_user_rewarded: Number(req.body.id_user_rewarded),
@@ -21,11 +21,12 @@ function postOneReward(req, res) {
             description: req.body.description };
         (0, rewardServices_js_1.insertOneReward)(newReward, (err, rewardId) => {
             if (err) {
-                res.status(500).json({ "message": err.message });
+                return res.status(500).json({ "message": err.message });
             }
-            else {
-                res.status(200).json({ "rewardId": rewardId });
-            }
+            ;
+            res.locals.rewardedPosted = "yes";
+            next();
+            //res.status(200).json({"rewardId": rewardId});
         });
     });
 }

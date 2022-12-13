@@ -5,26 +5,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=devicewidth, initial-scale=1.0">
-  <link rel="stylesheet" href="style/stylePointsWhitSending.css">
+  <link rel="stylesheet" href="/style/stylePointsWhitSending.css">
   <title>Mis puntos</title>
 </head>
 <body>
  
   <div id="menu">
-    <div class="menuFoot">
-      <a class="text_icon" href="http://localhost:3000/index.html"><img class="change_color_icon" src="img/iconosMenu/mis-puntos-gray.svg" alt="create"><br>Mis Puntos</a>
+    <div class="menuFoot" style="display: none">
+      <a class="text_icon" href="/index"><img class="change_color_icon" src="/img/iconosMenu/mis-puntos-gray.svg" alt="create"><br>Mis Puntos</a>
       <p class="text_hidden">MIS Puntos</p>
     </div>
     <div class="menuFoot">
-      <a class="text_icon" href="http://localhost:3000/ranking.html"><img class="change_color_icon" src="img/iconosMenu/ranking-gray.svg" alt="create"><br>Ranking</a>
+      <a class="text_icon" href="http://localhost:3000/ranking.html"><img class="change_color_icon" src="/img/iconosMenu/ranking-gray.svg" alt="create"><br>Ranking</a>
       <p class="text_hidden">Ranking</p>
     </div>
     <div class="menuFoot">
-      <a class="text_icon" href="/getStudentProfile"><img class="change_color_icon" src="img/iconosMenu/mi-perfil-gray.svg" alt="create"><br>Mi Perfil</a>
+      <a class="text_icon" href="/getStudentProfile"><img class="change_color_icon" src="/img/iconosMenu/mi-perfil-gray.svg" alt="create"><br>Mi Perfil</a>
       <p class="text_hidden">Mi Perfil</p>
     </div>
     <div class="menuFoot">
-      <a class="text_icon" href="http://localhost:3000/login.html"><img class="change_color_icon" src="img/iconosMenu/logout-gray.svg" alt="exit"><br>Salir</a>
+      <a class="text_icon" href="http://localhost:3000/login.html"><img class="change_color_icon" src="/img/iconosMenu/logout-gray.svg" alt="exit"><br>Salir</a>
       <p class="text_hidden">Salir</p>
     </div>
   </div>
@@ -54,7 +54,7 @@
       <p class="center">Alumnos Xarxatec Activa 2023</p>
       <form action="http://localhost:3000/rewards/<%= studentLogged.id_user %>" method="post">
       <div class="search">
-        <img id="iconActiva" src="img/puntos-activa-logo.svg" alt="logoBuscarGente">
+        <img id="iconActiva" src="/img/puntos-activa-logo.svg" alt="logoBuscarGente">
         
         <select name="id_user_rewarded" id="alumnos">
             <% studentsData.forEach( student=>{ %>
@@ -88,52 +88,20 @@
         30/07/2023</div>
       <p> Bieeen que hemos ganado el premio de no code. Sin tu cerebrito
         esto no habría sido posible. Un abrazo! </p>
-      <p> de parte de <b>Madonna Giménez</b></p>
+      <p> de parte de <b></b></p>
     </div>
     <hr id="hrHistory" />
-    <div class="pAlign">
-      <div><span class="pointsRed"><b>20</b></span> PUNTOS ENVIADOS
-        30/09/2023</div>
-      <br>
-      Bieeen que hemos ganado el premio de no code. Sin tu cerebrito
-      esto no habría sido posible. Un abrazo!<br>
-      <p>de parte de <b>Miguel Sueca</b>
-    </div>
-    </p>
-    <hr id="hrHistory" />
-    <div class="pAlign">
-      <div><span class="pointsRed"><b>30</b></span> PUNTOS ENVIADOS
-        30/11/2023</div>
-      <br>
-      Bieeen que hemos ganado el premio de no code. Sin tu paciencia
-      esto no habría sido posible. Un abrazo!<br>
-      <p> de parte de <b>Pedro sanchez</b>
-    </div>
-    </p>
-    <hr id="hrHistory" />
-    <div class="pAlign">
-      <div><span class="pointsRed"><b>90</b></span> PUNTOS ENVIADOS
-        30/11/2023</div>
-      <br>
-      Bieeen que hemos ganado el premio de no code. Sin tu mirada
-      esto no habría sido posible. Un abrazo!<br>
-      <p> de parte de <b>M. Rajoy </b>
-    </div>
-    </p>
-    <hr id="hrHistory" />
-    <div class="pAlign">
-      <div><span class="pointsRed"><b>60</b></span> PUNTOS ENVIADOS
-        30/11/2023</div>
-      <br>
-      Bieeen que hemos ganado el premio de no code. Sin tu cabeza
-      esto no habría sido posible. Un abrazo!<br>
-      <p> de parte de <b>Metallica</b>
-    </div>
-    </p>
+  
     <br><br><br><br>
   </div>
-  
-
+  <% if(locals.rewardedPosted) {%>
+    <script>window.alert("Se envió la recompensa");</script>
+  <% } %>
+  <% if (rewardType==1){ %>
+    <%- include("../partials/rewardReceived"); %>
+<% } else { %>
+    <%- include("../partials/rewardSended"); %>
+<% } %>
 </body>
 
 </html>

@@ -17,7 +17,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const axios_1 = __importDefault(require("axios"));
 function showRewards(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        //console.log("entra en showRewards")
+        console.log("entra en showRewards");
         if (req.session.token != undefined) {
             const tokenVerified = yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
             const myTokenVerified = tokenVerified;

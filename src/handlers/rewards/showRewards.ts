@@ -6,7 +6,7 @@ import { Student } from "../../model/types/student.js";
 
 
 async function showRewards(req: express.Request, res: express.Response){
-    //console.log("entra en showRewards")
+    
     if (req.session.token != undefined){ 
         const tokenVerified = await jsonwebtoken.verify(req.session.token, process.env.SESSION_SECRET!);
         const myTokenVerified: jwtToken = <jwtToken>tokenVerified;
