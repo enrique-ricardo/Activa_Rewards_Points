@@ -18,10 +18,10 @@ async function userValidation(req: express.Request, res: express.Response){
                 req.session.token = token;
 
                 if(user.isFirstLogin) return res.redirect('http://localhost:3000/createNewStudent.html');
-                console.log(user);
+                
                 
                 const result = await axios(`http://localhost:3000/students/getStudent/${user.id}`);
-               
+                
                 res.render("pages/index", { studentLogged: result.data.student });
             
             } else {

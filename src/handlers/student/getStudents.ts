@@ -8,7 +8,8 @@ async function getStudents(req: express.Request, res: express.Response){
         if(err){
             return res.status(404).json({"message": err.message});
         }
-        res.status(200).json(students);
+        console.log("Students inside getStudents.ts" + students);
+        return res.status(200).json(students);
     })
 }
 

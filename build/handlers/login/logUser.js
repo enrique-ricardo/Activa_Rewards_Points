@@ -26,7 +26,6 @@ function userValidation(req, res) {
                 req.session.token = token;
                 if (user.isFirstLogin)
                     return res.redirect('http://localhost:3000/createNewStudent.html');
-                console.log(user);
                 const result = yield (0, axios_1.default)(`http://localhost:3000/students/getStudent/${user.id}`);
                 res.render("pages/index", { studentLogged: result.data.student });
             }

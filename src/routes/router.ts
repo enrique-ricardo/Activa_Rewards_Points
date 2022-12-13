@@ -47,4 +47,6 @@ router.post("/users", validateToken, userIsAdmin, insertUser);
 
 router.get("/insertNewReward", insertReward);
 
+router.get("index/students", getStudents)
+
 export {router};

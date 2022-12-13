@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.insertStudent = void 0;
 const studentServices_js_1 = require("../../model/services/studentServices.js");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const axios_1 = __importDefault(require("axios"));
 function insertStudent(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const newStudent = req.body;
@@ -23,14 +24,18 @@ function insertStudent(req, res) {
             const myTokenVerified = tokenVerified;
             const idUser = myTokenVerified.id;
             const emailUser = myTokenVerified.email;
-            (0, studentServices_js_1.createStudent)(newStudent, idUser, emailUser, (err, studentId) => {
-                if (err) {
-                    res.status(500).json({ "message": err.message });
+            (0, studentServices_js_1.createStudent)(newStudent, idUser, emailUser, (err, studentId) => __awaiter(this, void 0, void 0, function* () {
+                if (!err) {
+                    const result = yield (0, axios_1.default)(`http://localhost:3000/students/getStudent/${idUser}`);
+                    return res.render("pages/index", { studentLogged: result.data.student });
                 }
-                else {
-                    res.render("pages/index");
-                }
-            });
+                res.status(500).json({ "message": err.message });
+                // if (err) {
+                //   res.status(500).json({"message": err.message});
+                // } else {
+                //   res.render("pages/index");
+                // }
+            }));
         }
         else {
             res.status(401).json({ "message": "Es obligatorio autenticarse antes de realizar esta operación" });
