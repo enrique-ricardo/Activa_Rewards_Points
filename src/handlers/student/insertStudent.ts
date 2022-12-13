@@ -1,10 +1,10 @@
-import express from "express";
+import express, { NextFunction } from "express";
 import {createStudent} from "../../model/services/studentServices.js";
 import {Student} from "../../model/types/student.js";
 import { jwtToken } from "../../model/types/jwtToken.js";
 import jsonwebtoken from 'jsonwebtoken';
 
-async function insertStudent(req: express.Request, res: express.Response){
+async function insertStudent(req: express.Request, res: express.Response, next: NextFunction){
     
   const newStudent: Student = req.body;
   if (req.session.token != undefined){ 
@@ -16,8 +16,8 @@ async function insertStudent(req: express.Request, res: express.Response){
       if (err) {
         res.status(500).json({"message": err.message});
       } else {
-       
-        res.render("pages/index");
+        
+        next();
       }
      });
   } else {

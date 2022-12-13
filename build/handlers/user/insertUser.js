@@ -9,7 +9,8 @@ function insertUser(req, res) {
             res.status(500).json({ "message": err.message });
         }
         else {
-            res.status(200).json({ "userId": userId });
+            // res.status(200).json({"userId": userId});
+            window.alert("El usuario se ha creado con éxito");
         }
     });
 }

@@ -1,15 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="60px" height="60px" viewBox="0 0 60 60" enable-background="new 0 0 60 60" xml:space="preserve">
-<g>
-	<circle fill="#808080" cx="30.357" cy="30" r="25"/>
-	<g>
-		<polygon fill="#FFFFFF" points="40.623,42 35.676,42 28.142,35 33.533,35 		"/>
-		<polygon fill="#FFFFFF" points="19.279,42 24.227,42 32.942,20 27.55,20 		"/>
-		<polygon fill="#FFFFFF" points="41.214,42 36.266,42 27.55,20 32.942,20 		"/>
-	</g>
-	<circle fill="none" stroke="#FFFFFF" stroke-width="2.3342" stroke-miterlimit="10" cx="30.356" cy="30" r="20.444"/>
-</g>
-</svg>
+<?xml version="1.0" encoding="UTF-8"?><svg id="uuid-e9dbae8a-082f-4011-9bc3-c0005d87efff" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><defs><style>.uuid-88f338d8-bf5c-49ea-bf58-a93dd6f7956d{fill:#fff;}.uuid-b086b777-ebc7-4502-88bd-4e795b84cc96{fill:gray;}.uuid-ac333606-8b45-4f2d-b54c-22df1e837806{fill:none;stroke:#fff;stroke-miterlimit:10;stroke-width:2.33px;}</style></defs><g id="uuid-291460c4-66ee-4a1a-96d2-0d6131e0193e"><g><circle class="uuid-b086b777-ebc7-4502-88bd-4e795b84cc96" cx="25" cy="25" r="25"/><g><polygon class="uuid-88f338d8-bf5c-49ea-bf58-a93dd6f7956d" points="35.27 37 30.32 37 22.78 30 28.18 30 35.27 37"/><polygon class="uuid-88f338d8-bf5c-49ea-bf58-a93dd6f7956d" points="13.92 37 18.87 37 27.59 15 22.19 15 13.92 37"/><polygon class="uuid-88f338d8-bf5c-49ea-bf58-a93dd6f7956d" points="35.86 37 30.91 37 22.19 15 27.59 15 35.86 37"/></g><circle class="uuid-ac333606-8b45-4f2d-b54c-22df1e837806" cx="25" cy="25" r="20.44"/></g></g></svg>

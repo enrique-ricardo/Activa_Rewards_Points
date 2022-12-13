@@ -6,10 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 function validateToken(req, res, next) {
+    console.log("estamos en validateToken");
     if (req.session.token != undefined) {
         const tokenVerified = jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
         if (tokenVerified) {
+            console.log("el token está verificado vamos al next()");
             next();
+            console.log("despues del next");
         }
     }
     else {

@@ -12,30 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.insertStudent = void 0;
-const studentServices_js_1 = require("../../model/services/studentServices.js");
+exports.showRewards = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-function insertStudent(req, res, next) {
+const axios_1 = __importDefault(require("axios"));
+function showRewards(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const newStudent = req.body;
+        console.log("entra en showRewards");
         if (req.session.token != undefined) {
             const tokenVerified = yield jsonwebtoken_1.default.verify(req.session.token, process.env.SESSION_SECRET);
             const myTokenVerified = tokenVerified;
-            const idUser = myTokenVerified.id;
-            const emailUser = myTokenVerified.email;
-            (0, studentServices_js_1.createStudent)(newStudent, idUser, emailUser, (err, studentId) => {
-                if (err) {
-                    res.status(500).json({ "message": err.message });
-                }
-                else {
-                    next();
-                }
-            });
+            const resultAxiosStudent = yield (0, axios_1.default)(`http://localhost:3000/students/getStudent/${myTokenVerified.id}`);
+            const userLoggedStudentData = resultAxiosStudent.data.student;
+            const resultAxiosStudents = yield (0, axios_1.default)(`http://localhost:3000/students/getStudents/${myTokenVerified.id}`);
+            const studentData = resultAxiosStudents.data;
+            res.status(200).render("pages/index", { studentLogged: userLoggedStudentData, studentsData: studentData });
         }
         else {
-            res.status(401).json({ "message": "Es obligatorio autenticarse antes de realizar esta operación" });
+            res.status(401).send("No te has autenticado");
         }
     });
 }
-exports.insertStudent = insertStudent;
-;
+exports.showRewards = showRewards;
