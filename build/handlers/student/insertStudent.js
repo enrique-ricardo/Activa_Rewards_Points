@@ -15,12 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.insertStudent = void 0;
 const studentServices_js_1 = require("../../model/services/studentServices.js");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-<<<<<<< HEAD
 const axios_1 = __importDefault(require("axios"));
 function insertStudent(req, res) {
-=======
-function insertStudent(req, res, next) {
->>>>>>> cbeb04c0b51af89ca7daa94af1c73e3da12a09ef
     return __awaiter(this, void 0, void 0, function* () {
         const newStudent = req.body;
         if (req.session.token != undefined) {
@@ -29,24 +25,17 @@ function insertStudent(req, res, next) {
             const idUser = myTokenVerified.id;
             const emailUser = myTokenVerified.email;
             (0, studentServices_js_1.createStudent)(newStudent, idUser, emailUser, (err, studentId) => __awaiter(this, void 0, void 0, function* () {
-                if (!err) {
-                    const result = yield (0, axios_1.default)(`http://localhost:3000/students/getStudent/${idUser}`);
-                    return res.render("pages/index", { studentLogged: result.data.student });
+                if (err) {
+                    return res.status(400).json({ "message": err.message });
                 }
-<<<<<<< HEAD
-                res.status(500).json({ "message": err.message });
+                const result = yield (0, axios_1.default)(`http://localhost:3000/students/getStudent/${idUser}`);
+                return res.render("pages/index", { studentLogged: result.data.student });
                 // if (err) {
                 //   res.status(500).json({"message": err.message});
                 // } else {
                 //   res.render("pages/index");
                 // }
             }));
-=======
-                else {
-                    next();
-                }
-            });
->>>>>>> cbeb04c0b51af89ca7daa94af1c73e3da12a09ef
         }
         else {
             res.status(401).json({ "message": "Es obligatorio autenticarse antes de realizar esta operación" });

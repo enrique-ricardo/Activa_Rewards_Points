@@ -17,10 +17,11 @@ async function userValidation(req: express.Request, res: express.Response, next:
             if (await bcrypt.compare(req.body.password, user.password)){
                 const token = jsonwebtoken.sign({"email": user.email, "role": user.role, "id": user.id}, process.env.SESSION_SECRET!)
                 req.session.token = token;
-                if(await userIsAdmin) return res.redirect('http://localhost:3000/indexAdmin.html')
-                if(user.isFirstLogin) return res.redirect('http://localhost:3000/createNewStudent.html');{
+               
+                if(user.isFirstLogin) return res.redirect('http://localhost:3000/createNewStudent.html');
 
-                };
+                
+                if(await userIsAdmin) return res.redirect('http://localhost:3000/indexAdmin.html');
 
                 //console.log(user);
                 

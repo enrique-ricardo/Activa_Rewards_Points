@@ -1,5 +1,5 @@
 import express from "express";
-import {createNewReward} from "../../model/services/rewardServices.js";
+import {insertOneReward} from "../../model/services/rewardServices.js";
 import {Reward} from "../../model/types/Reward.js";
 import { jwtToken } from "../../model/types/jwtToken.js";
 import jsonwebtoken from 'jsonwebtoken';
@@ -13,7 +13,7 @@ const insertReward = async (req: express.Request, res: express.Response) => {
     const rewardUserId = String(myTokenVerified.id);
     
     const rewardStudent = await axios(`http://localhost:3000/students/getStudent/${rewardUserId}`); 
-    createNewReward(newReward, newReward.id_user_sender, newReward.id_user_rewarded, newReward.xp_points, newReward.description, (err: Error, rewardStudentId: number) => {
+    insertOneReward(newReward, (err: Error, rewardStudentId: number) => {
     if (err) {
       return res.status(500).json({"message": err.message});
     } else{

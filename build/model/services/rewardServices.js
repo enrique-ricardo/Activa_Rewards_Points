@@ -16,7 +16,6 @@ function insertOneReward(reward, callback) {
     });
 }
 exports.insertOneReward = insertOneReward;
-//TODO no pasa el id bien!!!
 const getStudentReceivedRewards = (id_user_reward, callback) => {
     const queryString = `SELECT sum(xp_points) FROM reward WHERE id_user_reward = ?`;
     config_js_1.db.query(queryString, [id_user_reward], (err, result) => {
@@ -42,7 +41,9 @@ const getStudentSendedRewards = (id_user_sender, callback) => {
 };
 exports.getStudentSendedRewards = getStudentSendedRewards;
 const getListReceivedRewards = (id_user_reward, callback) => {
-    const queryString = `SELECT (id_user_sender, id_user_reward, xp_points, date, description) FROM reward WHERE id_user_reward = ?`;
+    const queryString = `SELECT (student.name, reward.id_user_sender, reward.id_user_reward, reward.xp_points, reward.date, reward.description) 
+                      FROM reward INNER JOIN student ON reward.id_user_sender = student.id_user 
+                      WHERE id_user_reward = ?`;
     config_js_1.db.query(queryString, [id_user_reward], (err, result) => {
         if (err) {
             callback(err, null);
@@ -54,7 +55,9 @@ const getListReceivedRewards = (id_user_reward, callback) => {
 };
 exports.getListReceivedRewards = getListReceivedRewards;
 const getListSendedRewards = (id_user_sender, callback) => {
-    const queryString = `SELECT (id_user_sender, id_user_reward, xp_points, date, description) FROM reward WHERE id_user_reward = ?`;
+    const queryString = `SELECT (student.name, reward.id_user_sender, reward.id_user_reward, reward.xp_points, reward.date, reward.description) 
+                      FROM reward INNER JOIN student ON reward.id_user_rewarded = student.id_user 
+                      ORDER BY reward.date DESC LIMIT 0,5`;
     config_js_1.db.query(queryString, [id_user_sender], (err, result) => {
         if (err) {
             callback(err, null);

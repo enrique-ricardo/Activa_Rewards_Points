@@ -6,12 +6,9 @@ function insertUser(req, res) {
     const newUser = req.body;
     (0, userServices_js_1.insertOneUser)(newUser, (err, userId) => {
         if (err) {
-            res.status(500).json({ "message": err.message });
+            return res.status(500).json({ "message": err.message });
         }
-        else {
-            // res.status(200).json({"userId": userId});
-            window.alert("El usuario se ha creado con éxito");
-        }
+        return res.redirect('http://localhost:3000/indexAdmin.html');
     });
 }
 exports.insertUser = insertUser;

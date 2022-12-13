@@ -28,21 +28,13 @@ function userValidation(req, res, next) {
                 req.session.token = token;
                 if (user.isFirstLogin)
                     return res.redirect('http://localhost:3000/createNewStudent.html');
-<<<<<<< HEAD
-                const result = yield (0, axios_1.default)(`http://localhost:3000/students/getStudent/${user.id}`);
-                res.render("pages/index", { studentLogged: result.data.student });
-=======
-                {
-                    if (yield userIsAdmin_js_1.userIsAdmin)
-                        return res.redirect('http://localhost:3000/indexAdmin.html');
-                }
-                ;
+                if (yield userIsAdmin_js_1.userIsAdmin)
+                    return res.redirect('http://localhost:3000/indexAdmin.html');
                 //console.log(user);
                 //  const result = await axios(`http://localhost:3000/students/getStudent/${user.id}`);
                 // console.log("renderiza index pasando solo studentLogged",result.data.student)
                 // res.render("pages/index", { studentLogged: result.data.student });
                 next();
->>>>>>> cbeb04c0b51af89ca7daa94af1c73e3da12a09ef
             }
             else {
                 res.render("pages/login", { errorMessage: "El usuario y la contraseña no coinciden" });
