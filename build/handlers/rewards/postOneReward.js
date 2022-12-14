@@ -13,8 +13,6 @@ exports.postOneReward = void 0;
 const rewardServices_js_1 = require("../../model/services/rewardServices.js");
 function postOneReward(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("en postOneReward");
-        //console.log("valores en req.body",req.body)
         const newReward = { id_user_sender: Number(req.params.id_user),
             id_user_rewarded: Number(req.body.id_user_rewarded),
             xp_points: Number(req.body.xp_points),
@@ -26,7 +24,6 @@ function postOneReward(req, res, next) {
             ;
             res.locals.rewardedPosted = "yes";
             next();
-            //res.status(200).json({"rewardId": rewardId});
         });
     });
 }
